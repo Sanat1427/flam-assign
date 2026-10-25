@@ -1,0 +1,81 @@
+=== 1. SOURCE ARCHIVE VERIFICATION ===
+URL:          https://dl.fbaipublicfiles.com/nllb/flores200_dataset.tar.gz
+Archive Path: your-submission\partA\corpus\flores200_dataset.tar.gz
+Size (bytes): 25585843 (expected 25585843)
+SHA-256:      b8b0b76783024b85797e5cc75064eb83fc5288b41e9654dabc7be6ae944011f6
+License:      CC-BY-SA-4.0 (Creative Commons Attribution-ShareAlike 4.0 International)
+
+=== 2. FLORES-200 DEVTEST METADATA & PROVENANCE ===
+Split:                  devtest (multi-way parallel across all languages)
+Total sentences/lang:   1012
+Unique source articles: 281 English Wikimedia articles
+Domains:                {'wikinews': 341, 'wikibooks': 351, 'wikivoyage': 320}
+Top 8 topics (norm):    [('travel', 91), ('politics', 51), ('sports', 39), ('crime and law', 32), ('entertainment', 25), ('travel, safety', 25), ('health', 23), ('science', 20)]
+
+=== 3. STARTER-KIT SAMPLE CORPUS VALIDATION (corpus_sample/) ===
+  eng (corpus_sample/eng_sample.txt): lines=10, empty=0, dups=0, multi_space_lines=1 (lines [7]), non_nfc_lines=0, words_split(' ')=79, words_split()=78, codepoints=448, graphemes=448, utf8_bytes=448 (file=458 B)
+  hin (corpus_sample/hin_sample.txt): lines=10, empty=0, dups=0, multi_space_lines=1 (lines [10]), non_nfc_lines=0, words_split(' ')=62, words_split()=61, codepoints=290, graphemes=188, utf8_bytes=764 (file=774 B)
+
+=== 4. RAW FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/raw/) ===
+Lang   | FLORES Code | Lines | Empty | Dups | NonNFC | MultiSpc | Words(sp) | Words(ws) | Codepoints | Graphemes | UTF8 Bytes
+----------------------------------------------------------------------------------------------------------------------
+eng    | eng_Latn   |  1012 |     0 |    0 |      0 |        0 |     21901 |     21901 |     131966 |    131966 |     132096
+hin    | hin_Deva   |  1012 |     0 |    0 |     93 |        6 |     25670 |     25643 |     131079 |     85978 |     337094
+tam    | tam_Taml   |  1012 |     0 |    0 |      2 |       75 |     16875 |     16775 |     154133 |     99724 |     421641
+tel    | tel_Telu   |  1012 |     0 |    0 |      1 |      136 |     17212 |     16938 |     132505 |     76602 |     353711
+kan    | kan_Knda   |  1012 |     0 |    0 |      7 |      213 |     16577 |     16100 |     138140 |     90471 |     375480
+mal    | mal_Mlym   |  1012 |     0 |    0 |      4 |       54 |     15001 |     14930 |     149336 |     79428 |     411753
+
+Detailed Raw Anomalies Detected Before Preprocessing:
+  - eng (English): phantom_words_from_double_spaces=+0 (across 0 lines, e.g. L[]); non_nfc_lines=0 (nfc_cp_delta=+0) []; csv_escaped_quote_lines=0
+  - hin (Hindi): phantom_words_from_double_spaces=+27 (across 6 lines, e.g. L[490, 506, 790]); non_nfc_lines=93 (nfc_cp_delta=+122) [{'line_num': 6, 'cp_delta': 1, 'singleton_chars': ['U+095B (DEVANAGARI LETTER ZA)']}, {'line_num': 25, 'cp_delta': 2, 'singleton_chars': ['U+095B (DEVANAGARI LETTER ZA)', 'U+095C (DEVANAGARI LETTER DDDHA)']}]; csv_escaped_quote_lines=0
+  - tam (Tamil): phantom_words_from_double_spaces=+100 (across 75 lines, e.g. L[1, 14, 15]); non_nfc_lines=2 (nfc_cp_delta=-2) [{'line_num': 103, 'cp_delta': -1, 'singleton_chars': []}, {'line_num': 868, 'cp_delta': -1, 'singleton_chars': []}]; csv_escaped_quote_lines=60
+  - tel (Telugu): phantom_words_from_double_spaces=+274 (across 136 lines, e.g. L[5, 9, 11]); non_nfc_lines=1 (nfc_cp_delta=-5) [{'line_num': 855, 'cp_delta': -5, 'singleton_chars': []}]; csv_escaped_quote_lines=68
+  - kan (Kannada): phantom_words_from_double_spaces=+477 (across 213 lines, e.g. L[1, 6, 12]); non_nfc_lines=7 (nfc_cp_delta=-13) [{'line_num': 215, 'cp_delta': -5, 'singleton_chars': []}, {'line_num': 321, 'cp_delta': -1, 'singleton_chars': []}]; csv_escaped_quote_lines=0
+  - mal (Malayalam): phantom_words_from_double_spaces=+71 (across 54 lines, e.g. L[42, 43, 47]); non_nfc_lines=4 (nfc_cp_delta=-4) [{'line_num': 369, 'cp_delta': -1, 'singleton_chars': []}, {'line_num': 468, 'cp_delta': -1, 'singleton_chars': []}]; csv_escaped_quote_lines=58
+
+=== 5. PROCESSED FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/processed/) ===
+Lang   | Script     | Lines | Empty | Dups | NonNFC | MultiSpc |    Words | Codepoints | Graphemes | UTF8 Bytes | CP/Word | Grapheme/W
+------------------------------------------------------------------------------------------------------------------------------
+eng    | Latin      |  1012 |     0 |    0 |      0 |        0 |    21901 |     131966 |    131966 |     132096 |    6.03 |       6.03
+hin    | Devanagari |  1012 |     0 |    0 |      0 |        0 |    25643 |     131174 |     85951 |     337433 |    5.12 |       3.35
+tam    | Tamil      |  1012 |     0 |    0 |      0 |        0 |    16775 |     154031 |     99624 |     421535 |    9.18 |       5.94
+tel    | Telugu     |  1012 |     0 |    0 |      0 |        0 |    16938 |     132226 |     76328 |     353422 |    7.81 |       4.51
+kan    | Kannada    |  1012 |     0 |    0 |      0 |        0 |    16100 |     137650 |     89994 |     374964 |    8.55 |       5.59
+mal    | Malayalam  |  1012 |     0 |    0 |      0 |        0 |    14930 |     149261 |     79357 |     411670 |   10.00 |       5.32
+
+=== 6. PARALLEL ALIGNMENT SPOT-CHECK (Processed Corpus) ===
+
+Sentence #0001 [Domain: wikinews | Topic: disease, research, canada | URL: https://en.wikinews.org/wiki/Toronto_team-led_research_on_Type_1_Diabetes_%27groundbreaking%27]:
+  [eng] "We now have 4-month-old mice that are non-diabetic that used to be diabetic," he added.
+  [hin] उन्होंने कहा “कि अब हमारे पास 4 महीने उम्र वाले चूहे हैं जिन्हें मधुमेह नहीं है जो मधुमेह के रोगी थे। ”
+  [tam] """எங்களிடம் இப்போது 4-மாத-வயதுடைய எலி ஒன்று உள்ளது, முன்னர் அதற்கு நீரிழிவு இருந்தது தற்போது இல்லை"" என்று அவர் மேலும் கூறினார்."
+  [tel] """""""ఇప్పుడు మావద్ద 4 నెలల వయస్సు గల ఎలుకలు ఉన్నాయి, అవి మధుమేహం లేనివి, అవి మధుమేహవ్యాధిగా ఉన్నాయి,"""" అని ఆయన అన్నారు."""
+  [kan] " ಈ ಮೊದಲು ಡಯಾಬೆಟಿಕ್ ಆಗಿದ್ದ ಆದರೆ ಈಗ ಡಯಾಬೆಟಿಕ್ ಅಲ್ಲದ 4 ತಿಂಗಳ ಇಲಿಗಳು ನಮ್ಮ ಬಳಿ ಇವೆ," ಎಂದು ಅವನು ಹೇಳಿದ.
+  [mal] പ്രമേഹമുണ്ടായിരുന്ന, ഇപ്പോൾ പ്രമേഹമില്ലാത്ത 4 മാസം പ്രായമുള്ള എലികളാണ് ഞങ്ങളുടെ പക്കലുള്ളത്.
+
+Sentence #0100 [Domain: wikinews | Topic: Health | URL: https://en.wikinews.org/wiki/Extremely_drug-resistant_tuberculosis_strain_emerges_in_South_Africa]:
+  [eng] Some patients might have contracted the bug in the hospital, Dr. Moll thinks, and at least two were hospital health workers.
+  [hin] डॉ मॉल का मानना है कि कुछ रोगियों का अस्पताल में ही संक्रमण हुआ होगा, और इन में कम से कम दो अस्पताल स्वास्थ्य कार्यकर्ता थे।
+  [tam] சில நோயாளிகளுக்கு மருத்துவமனையில் தவறு ஏற்பட்டிருக்கலாம், குறைந்தது இரண்டு பேர் மருத்துவமனை சுகாதார ஊழியர்களாக இருக்க வேண்டும் என்று டாக்டர் மோல் நினைக்கிறார்.
+  [tel] కొంతమంది రోగులకు ఆసుపత్రిలో క్రిమి సంక్రమించి ఉండవచ్చని, అందులో కనీసం ఇద్దరు ఆరోగ్య కార్యకర్తలకు అది సోకవచ్చని Dr. Moll అనుకుంటున్నారు.
+  [kan] ಕೆಲವು ರೋಗಿಗಳು ಆಸ್ಪತ್ರೆಯಿಂದ ಈ ಸೋಂಕು ಪಡೆದಿರಬಹುದೆಂದು, ಡಾ. ಮಾಲ್ ಅಭಿಪ್ರಾಯಪಡುತ್ತಾರೆ ಮತ್ತು ಅವರಲ್ಲಿ ಕನಿಷ್ಠ ಇಬ್ಬರು ಆಸ್ಪತ್ರೆಯ ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಾಗಿದ್ದರು.
+  [mal] ഡോക്ടർ മോൾ കരുതുന്നത് ചില രോഗികൾക്ക് ആശുപത്രിയിൽ വെച്ചാവാം വൈറസ് ബാധിച്ചതെന്നാണ്, കൂടാതെ കുറഞ്ഞത് രണ്ട് പേരെങ്കിലും ആശുപത്രിയിലെ ആരോഗ്യപ്രവർത്തകരായിരുന്നു.
+
+Sentence #0500 [Domain: wikibooks | Topic: sociology/culture | URL: https://en.wikibooks.org/wiki/Introduction_to_Sociology/Culture]:
+  [eng] Subcultures bring together like-minded individuals who feel neglected by societal standards and allow them to develop a sense of identity.
+  [hin] उपसंस्कृति समान विचारधारा वाले व्यक्तियों को साथ लाती है जो सामाजिक मानकों में अपने आप को पिछड़ा हुआ महसूस करते हैं और उन्हें अपनी पहचान की भावना विकसित करने की अनुमति देते हैं।
+  [tam] துணை கலாச்சாரங்கள், சமுதாய தரங்களால் புறக்கணிக்கப்பட்டதாக தங்களுக்குள் உணரும் ஒத்த சிந்தனையுள்ள மனிதர்களை ஒன்றிணைத்து, தங்களுக்கென ஒரு அடையாளத்தை வளர்த்துக்கொள்ள உதவுகின்றன.
+  [tel] ఉప సంస్కృతులు, సామాజిక ప్రమాణాల ద్వారా నిర్లక్ష్యం చేయబడి మరియు వారిలో ఒకే గుర్తింపు భావన కలిగిన ఒకే మనస్తత్వం గల వ్యక్తులను ఒక దగ్గరికి చేరుస్తుంది.
+  [kan] ಉಪಸಂಸ್ಕೃತಿಗಳು ಸಮಾನ-ಮನಸ್ಸಿನ ವ್ಯಕ್ತಿಗಳನ್ನು ಸಾಮಾಜಿಕ ಮಾನದಂಡಗಳಿಂದ ನಿರ್ಲಕ್ಷಿಸಲಾಗಿದೆ ಎಂದು ಭಾವಿಸುತ್ತದೆ ಮತ್ತು ಗುರುತಿನ ಪ್ರಜ್ಞೆಯನ್ನು ಬೆಳೆಸಿಕೊಳ್ಳಲು ಅನುವು ಮಾಡಿಕೊಡುತ್ತದೆ.
+  [mal] ഉപസംസ്കൃതി എന്നത്, സമൂഹത്തിന്റെ മാനദണ്ഡങ്ങൾ പ്രകാരം അവഗണിക്കപ്പെട്ടു എന്ന് ചിന്തിക്കുന്ന സമാന മനസ്ക്കരായ ആളുകളെ ഒരുമിച്ച് കൊണ്ടുവരികയും അവർക്ക് ഒരു വ്യക്തിത്വ ബോധം ഉണ്ടാക്കിയെടുക്കാൻ അനുവദിക്കുകയും ചെയ്യുന്നതാണ്.
+
+Sentence #1012 [Domain: wikivoyage | Topic: Reason to travel/Working in Japan | URL: https://en.wikivoyage.org/wiki/Working_and_studying_in_Japan]:
+  [eng] Workers must often get their superiors' approval for any decisions they make, and are expected to obey their superiors' instructions without question.
+  [hin] श्रमिकों को अक्सर किसी भी निर्णय के लिए अपने वरिष्ठ अधिकारियों की मंजूरी लेनी चाहिए, और उनसे बिना किसी सवाल के अपने वरिष्ठों के निर्देशों का पालन करने की अपेक्षा की जाती है.
+  [tam] தொழிலாளர்கள் தாங்கள் எடுக்கும் எந்தவொரு முடிவிற்கும் தங்கள் மேலதிகாரிகளின் அனுமதியைப் பெற வேண்டும், மற்றும் மேலதிகாரிகள் அறிவுதலுக்கு கேள்விகேட்காமல் கீழ்படிவார்கள் என எதிர்ப்பார்க்கப்படுகிறது.
+  [tel] కార్మికులు తాము తీసుకునే ఏ నిర్ణయాలకైనా తమ పై అధికారులకు అనుమతి నిస్తారు.
+  [kan] ಕಾರ್ಮಿಕರು ತಾವು ತೆಗೆದುಕೊಳ್ಳುವ ಯಾವುದೇ ನಿರ್ಧಾರಗಳಿಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ತಮ್ಮ ಮೇಲಧಿಕಾರಿಗಳ ಅನುಮೋದನೆಯನ್ನು ಪಡೆಯಬೇಕು ಮತ್ತು ಅವರು ಮೇಲಧಿಕಾರಿಗಳ ಸೂಚನೆಗಳನ್ನು ಪ್ರಶ್ನಿಸದೆಯೇ ಅವುಗಳನ್ನು ಅನುಸರಿಸುತ್ತಾರೆ ಎಂಬ ನಿರೀಕ್ಷೆಯಿದೆ.
+  [mal] ജോലിക്കാർക്ക് അവരുടെ ഏതൊരു തീരുമാനത്തിനും അവരുടെ മേലുദ്യോഗസ്ഥരുടെ അംഗീകാരം നേടേണ്ടതുണ്ട്, കൂടാതെ അവരുടെ മേലുദ്യോഗസ്ഥരുടെ നിർദ്ദേശങ്ങൾ തിരിച്ചുള്ള ചോദ്യങ്ങൾ ഇല്ലാതെ തന്നെ അനുസരിക്കേണ്ടതുമാണ്.
+
+Saved validation summary JSON to: your-submission\partA\corpus\corpus_validation_summary.json

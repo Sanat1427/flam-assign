@@ -1,0 +1,213 @@
+=== BASELINE PER-LINE BREAKDOWN ===
+
+--- eng (tot_tokens=99, tot_words=79, tot_chars=448) ---
+L01: tok=12 words= 8 chars=64 fert=1.500000 tpc=0.187500 | Bengaluru International Airport handled record traffic in March.
+L02: tok= 9 words= 7 chars=47 fert=1.285714 tpc=0.191489 | The Quarterly Review meeting moved to Thursday.
+L03: tok=13 words=12 chars=60 fert=1.083333 tpc=0.216667 | I bought this book yesterday from a small shop near MG Road.
+L04: tok= 8 words= 7 chars=43 fert=1.142857 tpc=0.186047 | Children are playing cricket on the ground.
+L05: tok= 7 words= 6 chars=34 fert=1.166667 tpc=0.205882 | The train arrived exactly on time.
+L06: tok=11 words= 8 chars=47 fert=1.375000 tpc=0.234043 | NASA and ISRO announced a joint mission update.
+L07: tok=10 words= 8 chars=39 fert=1.250000 tpc=0.256410 | Please keep the books  in the cupboard.
+L08: tok= 9 words= 6 chars=33 fert=1.500000 tpc=0.272727 | We are visiting Mysuru next week.
+L09: tok= 7 words= 6 chars=26 fert=1.166667 tpc=0.269231 | Do you want tea or coffee?
+L10: tok=13 words=11 chars=55 fert=1.181818 tpc=0.236364 | The GPU cluster ran out of memory during the night job.
+
+--- hin (tot_tokens=459, tot_words=62, tot_chars=290) ---
+L01: tok=47 words= 7 chars=30 fert=6.714286 tpc=1.566667 | मुझे सुबह की चाय बहुत पसंद है।
+L02: tok=61 words= 8 chars=38 fert=7.625000 tpc=1.605263 | बेंगलुरु में आज हल्की बारिश हो रही है।
+L03: tok=47 words= 7 chars=30 fert=6.714286 tpc=1.566667 | यह किताब मैंने कल ही खरीदी थी।
+L04: tok=51 words= 7 chars=32 fert=7.285714 tpc=1.593750 | हम अगले हफ़्ते मैसूर जा रहे हैं।
+L05: tok=34 words= 5 chars=24 fert=6.800000 tpc=1.416667 | क्या तुमने खाना खा लिया?
+L06: tok=40 words= 5 chars=24 fert=8.000000 tpc=1.666667 | ट्रेन ठीक समय पर पहुँची।
+L07: tok=59 words= 7 chars=36 fert=8.428571 tpc=1.638889 | बच्चे मैदान में क्रिकेट खेल रहे हैं।
+L08: tok=35 words= 4 chars=22 fert=8.750000 tpc=1.590909 | मुझे थोड़ा पानी चाहिए।
+L09: tok=40 words= 6 chars=26 fert=6.666667 tpc=1.538462 | आज दफ़्तर में बहुत काम था।
+L10: tok=45 words= 6 chars=28 fert=7.500000 tpc=1.607143 | किताबें  अलमारी में रखी हैं।
+
+==============================================================================
+E1: Word-counting behavior — line.split(' ') [Base] vs line.split() [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.283063 (1.28)            | +0.017857 (+1.41%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.598452 (7.60)            | +0.150000 (+2.01%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 5.922121 (5.92)            | +0.034973 (+0.59%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.225636 (0.226)           | +0.000000 (+0.00%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.579108 (1.579)           | +0.000000 (+0.00%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 6.998478 (7.00)            | +0.000000 (+0.00%)
+Totals (Base -> Exp): eng tokens=99->99, eng words=79->78, eng chars=448->448 | hin tokens=459->459, hin words=62->61, hin chars=290->290
+
+E1 Line-level word count differences (split(' ') vs split()):
+  [eng L07] split(' ')=8 words ['please', 'keep', 'the', 'books', '', 'in', 'the', 'cupboard.'] (fert=1.250000) vs split()=7 words ['please', 'keep', 'the', 'books', 'in', 'the', 'cupboard.'] (fert=1.428571)
+  [hin L10] split(' ')=6 words ['किताबें', '', 'अलमारी', 'में', 'रखी', 'हैं।'] (fert=7.500000) vs split()=5 words ['किताबें', 'अलमारी', 'में', 'रखी', 'हैं।'] (fert=9.000000)
+
+==============================================================================
+E2: Lowercasing — line.lower() [Base] vs Cased/Original [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.229329 (1.23)            | -0.035877 (-2.84%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.448452 (7.45)            | +0.000000 (+0.00%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 6.058958 (6.06)            | +0.171810 (+2.92%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.219562 (0.220)           | -0.006074 (-2.69%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.579108 (1.579)           | +0.000000 (+0.00%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 7.192069 (7.19)            | +0.193591 (+2.77%)
+Totals (Base -> Exp): eng tokens=99->96, eng words=79->79, eng chars=448->448 | hin tokens=459->459, hin words=62->62, hin chars=290->290
+
+E2 Line-level token differences (Cased vs Lowercased):
+  [eng L01] lower_tok=12 vs cased_tok=12 (delta=+0)
+    lower tokens: ['b', 'eng', 'al', 'uru', ' international', ' airport', ' handled', ' record', ' traffic', ' in', ' march', '.']
+    cased tokens: ['B', 'eng', 'al', 'uru', ' International', ' Airport', ' handled', ' record', ' traffic', ' in', ' March', '.']
+  [eng L02] lower_tok=9 vs cased_tok=8 (delta=-1)
+    lower tokens: ['the', ' quarterly', ' review', ' meeting', ' moved', ' to', ' th', 'ursday', '.']
+    cased tokens: ['The', ' Quarterly', ' Review', ' meeting', ' moved', ' to', ' Thursday', '.']
+  [eng L03] lower_tok=13 vs cased_tok=13 (delta=+0)
+    lower tokens: ['i', ' bought', ' this', ' book', ' yesterday', ' from', ' a', ' small', ' shop', ' near', ' mg', ' road', '.']
+    cased tokens: ['I', ' bought', ' this', ' book', ' yesterday', ' from', ' a', ' small', ' shop', ' near', ' MG', ' Road', '.']
+  [eng L04] lower_tok=8 vs cased_tok=8 (delta=+0)
+    lower tokens: ['children', ' are', ' playing', ' cricket', ' on', ' the', ' ground', '.']
+    cased tokens: ['Children', ' are', ' playing', ' cricket', ' on', ' the', ' ground', '.']
+  [eng L05] lower_tok=7 vs cased_tok=7 (delta=+0)
+    lower tokens: ['the', ' train', ' arrived', ' exactly', ' on', ' time', '.']
+    cased tokens: ['The', ' train', ' arrived', ' exactly', ' on', ' time', '.']
+  [eng L06] lower_tok=11 vs cased_tok=10 (delta=-1)
+    lower tokens: ['n', 'asa', ' and', ' is', 'ro', ' announced', ' a', ' joint', ' mission', ' update', '.']
+    cased tokens: ['NASA', ' and', ' IS', 'RO', ' announced', ' a', ' joint', ' mission', ' update', '.']
+  [eng L07] lower_tok=10 vs cased_tok=10 (delta=+0)
+    lower tokens: ['please', ' keep', ' the', ' books', ' ', ' in', ' the', ' cup', 'board', '.']
+    cased tokens: ['Please', ' keep', ' the', ' books', ' ', ' in', ' the', ' cup', 'board', '.']
+  [eng L08] lower_tok=9 vs cased_tok=9 (delta=+0)
+    lower tokens: ['we', ' are', ' visiting', ' my', 'sur', 'u', ' next', ' week', '.']
+    cased tokens: ['We', ' are', ' visiting', ' M', 'ys', 'uru', ' next', ' week', '.']
+  [eng L09] lower_tok=7 vs cased_tok=7 (delta=+0)
+    lower tokens: ['do', ' you', ' want', ' tea', ' or', ' coffee', '?']
+    cased tokens: ['Do', ' you', ' want', ' tea', ' or', ' coffee', '?']
+  [eng L10] lower_tok=13 vs cased_tok=12 (delta=-1)
+    lower tokens: ['the', ' g', 'pu', ' cluster', ' ran', ' out', ' of', ' memory', ' during', ' the', ' night', ' job', '.']
+    cased tokens: ['The', ' GPU', ' cluster', ' ran', ' out', ' of', ' memory', ' during', ' the', ' night', ' job', '.']
+  [hin] 0/10 lines changed token IDs or token counts.
+
+==============================================================================
+E3: Aggregation — Macro-average [Base] vs Micro-average (tot_tok/tot_words) [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.253165 (1.25)            | -0.012041 (-0.95%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.403226 (7.40)            | -0.045227 (-0.61%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 5.907625 (5.91)            | +0.020477 (+0.35%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.220982 (0.221)           | -0.004654 (-2.06%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.582759 (1.583)           | +0.003650 (+0.23%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 7.162382 (7.16)            | +0.163904 (+2.34%)
+Totals (Base -> Exp): eng tokens=99->99, eng words=79->79, eng chars=448->448 | hin tokens=459->459, hin words=62->62, hin chars=290->290
+
+==============================================================================
+E4a: Character denominator — Unicode codepoints len(line) [Base] vs UTF-8 bytes [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.265206 (1.27)            | +0.000000 (+0.00%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.448452 (7.45)            | +0.000000 (+0.00%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 5.887148 (5.89)            | +0.000000 (+0.00%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.225636 (0.226)           | +0.000000 (+0.00%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 0.598992 (0.599)           | -0.980116 (-62.07%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 2.654683 (2.65)            | -4.343796 (-62.07%)
+Totals (Base -> Exp): eng tokens=99->99, eng words=79->79, eng chars=448->448 | hin tokens=459->459, hin words=62->62, hin chars=290->764
+  E4a Micro-averaged tok/byte: eng=0.220982 (99/448), hin=0.600785 (459/764), ratio=2.718705 (2.72x)
+
+==============================================================================
+E4b: Character denominator — Unicode codepoints len(line) [Base] vs Grapheme clusters (\X) [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.265206 (1.27)            | +0.000000 (+0.00%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.448452 (7.45)            | +0.000000 (+0.00%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 5.887148 (5.89)            | +0.000000 (+0.00%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.225636 (0.226)           | +0.000000 (+0.00%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 2.449732 (2.450)           | +0.870624 (+55.13%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 10.857013 (10.86)          | +3.858534 (+55.13%)
+Totals (Base -> Exp): eng tokens=99->99, eng words=79->79, eng chars=448->448 | hin tokens=459->459, hin words=62->62, hin chars=290->188
+  E4b Micro-averaged tok/grapheme: eng=0.220982 (99/448), hin=2.441489 (459/188), ratio=11.048356 (11.05x)
+
+==============================================================================
+E4c: Character denominator — len(line) with spaces [Base] vs non-space codepoints [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.265206 (1.27)            | +0.000000 (+0.00%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.448452 (7.45)            | +0.000000 (+0.00%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 5.887148 (5.89)            | +0.000000 (+0.00%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.268409 (0.268)           | +0.042773 (+18.96%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.921600 (1.922)           | +0.342492 (+21.69%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 7.159222 (7.16)            | +0.160744 (+2.30%)
+Totals (Base -> Exp): eng tokens=99->99, eng words=79->79, eng chars=448->379 | hin tokens=459->459, hin words=62->62, hin chars=290->238
+
+E4 Hindi Line-by-Line Codepoints vs Graphemes vs UTF-8 Bytes:
+  hin L01: tokens=47 | codepoints=30 | graphemes=22 | utf8_bytes= 78 | मुझे सुबह की चाय बहुत पसंद है।
+  hin L02: tokens=61 | codepoints=38 | graphemes=24 | utf8_bytes=100 | बेंगलुरु में आज हल्की बारिश हो रही है।
+  hin L03: tokens=47 | codepoints=30 | graphemes=21 | utf8_bytes= 78 | यह किताब मैंने कल ही खरीदी थी।
+  hin L04: tokens=51 | codepoints=32 | graphemes=21 | utf8_bytes= 84 | हम अगले हफ़्ते मैसूर जा रहे हैं।
+  hin L05: tokens=34 | codepoints=24 | graphemes=14 | utf8_bytes= 62 | क्या तुमने खाना खा लिया?
+  hin L06: tokens=40 | codepoints=24 | graphemes=17 | utf8_bytes= 64 | ट्रेन ठीक समय पर पहुँची।
+  hin L07: tokens=59 | codepoints=36 | graphemes=21 | utf8_bytes= 96 | बच्चे मैदान में क्रिकेट खेल रहे हैं।
+  hin L08: tokens=35 | codepoints=22 | graphemes=13 | utf8_bytes= 60 | मुझे थोड़ा पानी चाहिए।
+  hin L09: tokens=40 | codepoints=26 | graphemes=18 | utf8_bytes= 68 | आज दफ़्तर में बहुत काम था।
+  hin L10: tokens=45 | codepoints=28 | graphemes=17 | utf8_bytes= 74 | किताबें  अलमारी में रखी हैं।
+
+E4 Characters-per-word Check (Refuting REPORT_v0.md Finding #3):
+  Using split(' '): eng chars/word = 448/79 = 5.671 | hin chars/word = 290/62 = 4.677
+  Using split():    eng chars/word = 448/78 = 5.744 | hin chars/word = 290/61 = 4.754
+
+==============================================================================
+E5: Corpus Comparability — Semantic Alignment Analysis
+==============================================================================
+Matched semantic pairs between eng_sample.txt and hin_sample.txt (out of order!):
+  Pair (Buying book yesterday):
+    eng L03 (tok=13): I bought this book yesterday from a small shop near MG Road.
+    hin L03 (tok=47): यह किताब मैंने कल ही खरीदी थी।
+  Pair (Children playing cricket on ground):
+    eng L04 (tok= 8): Children are playing cricket on the ground.
+    hin L07 (tok=59): बच्चे मैदान में क्रिकेट खेल रहे हैं।
+  Pair (Train arrived on time):
+    eng L05 (tok= 7): The train arrived exactly on time.
+    hin L06 (tok=40): ट्रेन ठीक समय पर पहुँची।
+  Pair (Keep books in cupboard):
+    eng L07 (tok=10): Please keep the books  in the cupboard.
+    hin L10 (tok=45): किताबें  अलमारी में रखी हैं।
+  Pair (Visiting Mysuru next week):
+    eng L08 (tok= 9): We are visiting Mysuru next week.
+    hin L04 (tok=51): हम अगले हफ़्ते मैसूर जा रहे हैं।
+
+==============================================================================
+E5: Full 10-line non-parallel corpus [Base] vs 5-line semantically matched subset [Exp]
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.228571 (1.23)            | -0.036634 (-2.90%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.585714 (7.59)            | +0.137262 (+1.84%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 6.174419 (6.17)            | +0.287271 (+4.88%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.227547 (0.228)           | +0.001911 (+0.85%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.614623 (1.615)           | +0.035515 (+2.25%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 7.095790 (7.10)            | +0.097312 (+1.39%)
+Totals (Base -> Exp): eng tokens=99->47, eng words=79->39, eng chars=448->209 | hin tokens=459->242, hin words=62->32, hin chars=290->150
+
+==============================================================================
+E6: Harmless-Looking Code Checks (random.seed, NFC normalization, add_special_tokens)
+==============================================================================
+E6a (random.seed removed/changed): eng_fert_diff=0.0000000000, hin_fert_diff=0.0000000000
+E6b (NFC vs Raw on corpus_sample): eng lines changed=0/10, hin lines changed=0/10
+    eng_fert_diff=0.0000000000, hin_fert_diff=0.0000000000
+    (Counterfactual NFD vs NFC on hin_sample): NFD tot_chars=290 vs NFC tot_chars=290, NFD tot_tokens=459 vs NFC tot_tokens=459
+E6c (add_special_tokens=False): spec='gpt2' starts with 'hf:'=False; transformers installed=False; tiktoken enc.encode adds 0 special tokens by default.
+
+==============================================================================
+Combined Code Fixes (split() + cased + micro-avg) on 10-line sample
+==============================================================================
+Metric                       | Baseline (unrounded / fmt) | Experiment (unrounded / fmt) | Delta (Exp - Base)
+----------------------------------------------------------------------------------------------------------
+eng fertility (tok/word)     | 1.265206 (1.27)            | 1.230769 (1.23)            | -0.034436 (-2.72%)
+hin fertility (tok/word)     | 7.448452 (7.45)            | 7.524590 (7.52)            | +0.076138 (+1.02%)
+hin/eng fertility ratio      | 5.887148 (5.89)            | 6.113730 (6.11)            | +0.226582 (+3.85%)
+eng tok/char (or denom)      | 0.225636 (0.226)           | 0.214286 (0.214)           | -0.011350 (-5.03%)
+hin tok/char (or denom)      | 1.579108 (1.579)           | 1.582759 (1.583)           | +0.003650 (+0.23%)
+hin/eng tok/char ratio       | 6.998478 (7.00)            | 7.386207 (7.39)            | +0.387729 (+5.54%)
+Totals (Base -> Exp): eng tokens=99->96, eng words=79->78, eng chars=448->448 | hin tokens=459->459, hin words=62->61, hin chars=290->290
