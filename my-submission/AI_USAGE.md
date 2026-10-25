@@ -1,7 +1,7 @@
 # AI Usage Disclosure (`AI_USAGE.md`)
 
 **Assignment:** AI Team Intern Assignment — *The Audit*  
-**Canonical Submission Path:** `your-submission/AI_USAGE.md`
+**Canonical Submission Path:** `my-submission/AI_USAGE.md`
 
 ---
 
@@ -10,11 +10,11 @@
 We used an AI coding assistant (pair-programming agent) across Parts A, B, and C for the following tasks:
 
 1. **Experiment Scripting & Data Pipeline Automation (Part A):**
-   - Generated the boilerplate CLI and tabular reporting structure for `your-submission/partA/audit_experiments.py` (testing single-variable perturbations `E1–E6` on `fertility.py`), `your-submission/partA/build_corpus.py` (downloading and extracting `flores200_dataset.tar.gz`, verifying SHA-256 checksums, applying `NFC` and whitespace normalization, and computing corpus statistics), and `your-submission/partA/compare_tokenizers.py` (running `tiktoken` `gpt2`, `cl100k_base`, and `o200k_base` across five denominators: whitespace words, Unicode codepoints, extended grapheme clusters `\X`, UTF-8 bytes, and aligned sentences).
+   - Generated the boilerplate CLI and tabular reporting structure for `my-submission/partA/audit_experiments.py` (testing single-variable perturbations `E1–E6` on `fertility.py`), `my-submission/partA/build_corpus.py` (downloading and extracting `flores200_dataset.tar.gz`, verifying SHA-256 checksums, applying `NFC` and whitespace normalization, and computing corpus statistics), and `my-submission/partA/compare_tokenizers.py` (running `tiktoken` `gpt2`, `cl100k_base`, and `o200k_base` across five denominators: whitespace words, Unicode codepoints, extended grapheme clusters `\X`, UTF-8 bytes, and aligned sentences).
 2. **Capacity & Throughput Reconciliation Scripting (Part B):**
-   - Wrote `your-submission/partB/capacity_reconciliation.py` to parse `bench/model_spec.md` and `bench/bench_log.csv`, compute per-token and per-sequence GQA KV-cache memory in both decimal (`GB`/`MB`) and binary (`GiB`/`MiB`/`KiB`) units, reconcile `reported_tok_s` against total-token throughput vs. generated-output-token throughput, and generate the sensitivity tables in `your-submission/partB/partB_reconciliation.json`.
+   - Wrote `my-submission/partB/capacity_reconciliation.py` to parse `bench/model_spec.md` and `bench/bench_log.csv`, compute per-token and per-sequence GQA KV-cache memory in both decimal (`GB`/`MB`) and binary (`GiB`/`MiB`/`KiB`) units, reconcile `reported_tok_s` against total-token throughput vs. generated-output-token throughput, and generate the sensitivity tables in `my-submission/partB/partB_reconciliation.json`.
 3. **Document Structuring & Arithmetic Cross-Checking (Parts A, B, C):**
-   - Assisted in formatting Markdown comparison tables, checking floating-point vs. rounded consistency across JSON outputs and prose reports (`a3_analysis.md`, `partA/memo.md`, `partB_report.md`, `partC/memo.md`), and maintaining chronological entries in `your-submission/NOTEBOOK.md`.
+   - Assisted in formatting Markdown comparison tables, checking floating-point vs. rounded consistency across JSON outputs and prose reports (`a3_analysis.md`, `partA/memo.md`, `partB_report.md`, `partC/memo.md`), and maintaining chronological entries in `my-submission/NOTEBOOK.md`.
 
 ---
 

@@ -1,6 +1,6 @@
 === 1. SOURCE ARCHIVE VERIFICATION ===
 URL:          https://dl.fbaipublicfiles.com/nllb/flores200_dataset.tar.gz
-Archive Path: your-submission\partA\corpus\flores200_dataset.tar.gz
+Archive Path: my-submission\partA\corpus\flores200_dataset.tar.gz
 Size (bytes): 25585843 (expected 25585843)
 SHA-256:      b8b0b76783024b85797e5cc75064eb83fc5288b41e9654dabc7be6ae944011f6
 License:      CC-BY-SA-4.0 (Creative Commons Attribution-ShareAlike 4.0 International)
@@ -16,7 +16,7 @@ Top 8 topics (norm):    [('travel', 91), ('politics', 51), ('sports', 39), ('cri
   eng (corpus_sample/eng_sample.txt): lines=10, empty=0, dups=0, multi_space_lines=1 (lines [7]), non_nfc_lines=0, words_split(' ')=79, words_split()=78, codepoints=448, graphemes=448, utf8_bytes=448 (file=458 B)
   hin (corpus_sample/hin_sample.txt): lines=10, empty=0, dups=0, multi_space_lines=1 (lines [10]), non_nfc_lines=0, words_split(' ')=62, words_split()=61, codepoints=290, graphemes=188, utf8_bytes=764 (file=774 B)
 
-=== 4. RAW FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/raw/) ===
+=== 4. RAW FLORES-200 DEVTEST VALIDATION (my-submission/partA/corpus/raw/) ===
 Lang   | FLORES Code | Lines | Empty | Dups | NonNFC | MultiSpc | Words(sp) | Words(ws) | Codepoints | Graphemes | UTF8 Bytes
 ----------------------------------------------------------------------------------------------------------------------
 eng    | eng_Latn   |  1012 |     0 |    0 |      0 |        0 |     21901 |     21901 |     131966 |    131966 |     132096
@@ -34,7 +34,7 @@ Detailed Raw Anomalies Detected Before Preprocessing:
   - kan (Kannada): phantom_words_from_double_spaces=+477 (across 213 lines, e.g. L[1, 6, 12]); non_nfc_lines=7 (nfc_cp_delta=-13) [{'line_num': 215, 'cp_delta': -5, 'singleton_chars': []}, {'line_num': 321, 'cp_delta': -1, 'singleton_chars': []}]; csv_escaped_quote_lines=0
   - mal (Malayalam): phantom_words_from_double_spaces=+71 (across 54 lines, e.g. L[42, 43, 47]); non_nfc_lines=4 (nfc_cp_delta=-4) [{'line_num': 369, 'cp_delta': -1, 'singleton_chars': []}, {'line_num': 468, 'cp_delta': -1, 'singleton_chars': []}]; csv_escaped_quote_lines=58
 
-=== 5. PROCESSED FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/processed/) ===
+=== 5. PROCESSED FLORES-200 DEVTEST VALIDATION (my-submission/partA/corpus/processed/) ===
 Lang   | Script     | Lines | Empty | Dups | NonNFC | MultiSpc |    Words | Codepoints | Graphemes | UTF8 Bytes | CP/Word | Grapheme/W
 ------------------------------------------------------------------------------------------------------------------------------
 eng    | Latin      |  1012 |     0 |    0 |      0 |        0 |    21901 |     131966 |    131966 |     132096 |    6.03 |       6.03
@@ -78,4 +78,4 @@ Sentence #1012 [Domain: wikivoyage | Topic: Reason to travel/Working in Japan | 
   [kan] ಕಾರ್ಮಿಕರು ತಾವು ತೆಗೆದುಕೊಳ್ಳುವ ಯಾವುದೇ ನಿರ್ಧಾರಗಳಿಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ತಮ್ಮ ಮೇಲಧಿಕಾರಿಗಳ ಅನುಮೋದನೆಯನ್ನು ಪಡೆಯಬೇಕು ಮತ್ತು ಅವರು ಮೇಲಧಿಕಾರಿಗಳ ಸೂಚನೆಗಳನ್ನು ಪ್ರಶ್ನಿಸದೆಯೇ ಅವುಗಳನ್ನು ಅನುಸರಿಸುತ್ತಾರೆ ಎಂಬ ನಿರೀಕ್ಷೆಯಿದೆ.
   [mal] ജോലിക്കാർക്ക് അവരുടെ ഏതൊരു തീരുമാനത്തിനും അവരുടെ മേലുദ്യോഗസ്ഥരുടെ അംഗീകാരം നേടേണ്ടതുണ്ട്, കൂടാതെ അവരുടെ മേലുദ്യോഗസ്ഥരുടെ നിർദ്ദേശങ്ങൾ തിരിച്ചുള്ള ചോദ്യങ്ങൾ ഇല്ലാതെ തന്നെ അനുസരിക്കേണ്ടതുമാണ്.
 
-Saved validation summary JSON to: your-submission\partA\corpus\corpus_validation_summary.json
+Saved validation summary JSON to: my-submission\partA\corpus\corpus_validation_summary.json

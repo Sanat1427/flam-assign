@@ -2,8 +2,8 @@
 
 **To:** Engineering Leadership & Launch Review Committee  
 **From:** AI Team Intern (The Audit)  
-**Canonical Path:** `your-submission/partC/memo.md` *(mirrored identically at `my-submission/partC/memo.md`)*  
-**Supporting Audit Evidence:** `REPORT_v0.md`, `bench/model_spec.md`, `bench/bench_log.csv`, `your-submission/partA/{memo.md, a3_analysis.md}`, `your-submission/partB/{partB_report.md, partB_reconciliation.json}`
+**Canonical Path:** `my-submission/partC/memo.md`  
+**Supporting Audit Evidence:** `REPORT_v0.md`, `bench/model_spec.md`, `bench/bench_log.csv`, `my-submission/partA/{memo.md, a3_analysis.md}`, `my-submission/partB/{partB_report.md, partB_reconciliation.json}`
 
 ---
 
@@ -25,7 +25,7 @@
 - **Kill Criterion (Observation & Deadline to Abandon Path):**
   - *Kill Gate #1 (Day 3 EOD):* Abandon the Week-2 LoRA SFT experiment immediately if $< 10,000$ clean, decontaminated, permissively licensed conversational/instruction pairs exist locally (`$0` API budget) or if `FLM-4B-Instruct`'s `128k` tokenizer exhibits severe UTF-8 byte fallback (`> 5×` token-count-per-aligned-sentence ratio vs. English).
   - *Kill Gate #2 (Day 8 EOD / Week 3 Round 3):* Abandon the SFT checkpoint and ship **Option 3 (Concise System Prompt)** if SFT degrades English accuracy/formatting by `> 1.0%`, inflates P95 output token length by `> +15%`, or fails to beat Option 3 by `>= +15.0 pp` net win margin in Week 3 blinded human review.
-- **First Experiment to Run on Day 1:** Run `your-submission/partA/compare_tokenizers.py` with `FLM-4B-Instruct`'s actual `128k` production tokenizer on the `1,012` aligned FLORES-200 `devtest` sentences (`your-submission/partA/corpus/processed/{eng,hin,kan,tam,tel,mal}.txt`) to measure its exact token-count-per-aligned-sentence ratio and generate a `20`-prompt baseline sample (`Base` vs. `Option 3` draft prompt) in Hindi and Kannada to diagnose whether "too formal/textbook" outputs are solvable via system-prompt steering or stem from base weight limitations.
+- **First Experiment to Run on Day 1:** Run `my-submission/partA/compare_tokenizers.py` with `FLM-4B-Instruct`'s actual `128k` production tokenizer on the `1,012` aligned FLORES-200 `devtest` sentences (`my-submission/partA/corpus/processed/{eng,hin,kan,tam,tel,mal}.txt`) to measure its exact token-count-per-aligned-sentence ratio and generate a `20`-prompt baseline sample (`Base` vs. `Option 3` draft prompt) in Hindi and Kannada to diagnose whether "too formal/textbook" outputs are solvable via system-prompt steering or stem from base weight limitations.
 
 **Why This Decision Is Justified by the Actual Evidence and Constraints (Rather Than Defaulting Blindly to SFT):**
 - **Distinguishing Recommendations from Validated Outcomes:** No prompt engineering, SFT run, or Hindi/Kannada generation quality benchmark has been executed on `FLM-4B-Instruct` in this workspace.
@@ -65,7 +65,7 @@
 
 ### 4.1 Week 1 — Baseline Audit, Golden Eval Freeze, Option 3 Primary Baseline, and SFT Data Gate
 - **Days 1–2 (Tokenizer Audit & Golden Evaluation Set Freeze):**
-  1. **Audit `FLM-4B-Instruct`'s Actual `128k` Tokenizer:** Run `your-submission/partA/compare_tokenizers.py` on `your-submission/partA/corpus/processed/{eng,hin,kan}.txt` (`1,012` aligned FLORES-200 sentences) to measure `FLM-4B-Instruct`'s exact token-count-per-aligned-sentence ratio for Hindi and Kannada.
+  1. **Audit `FLM-4B-Instruct`'s Actual `128k` Tokenizer:** Run `my-submission/partA/compare_tokenizers.py` on `my-submission/partA/corpus/processed/{eng,hin,kan}.txt` (`1,012` aligned FLORES-200 sentences) to measure `FLM-4B-Instruct`'s exact token-count-per-aligned-sentence ratio for Hindi and Kannada.
   2. **Freeze the Representative Evaluation Set (`240` Total Prompts: `80` Hindi + `80` Kannada + `80` English Regression):** Commit SHA-256 hashes of all `240` golden test prompts (plus a separate `40` Hindi + `40` Kannada dev split for Week 2 tuning) to Git *before* inspecting any training data (Section 5.1).
 - **Day 3 (Option 3 Implementation & SFT Feasibility Gate):**
   1. **Implement Option 3 (Primary Launch Baseline):** Create language-routed concise system prompts ($\Delta p \le 128$ tokens) for Hindi and Kannada enforcing target script fidelity (native Devanagari/Kannada vs. Romanized Hinglish/Kanglish matching the user's query), concise non-repetitive generation, and strict preservation of code/JSON/numbers.
@@ -105,7 +105,7 @@
     4. *Structured Output & Entity/Format Preservation* (`20` test, `10` dev — JSON, Markdown tables, code blocks, dates/numbers).
   - **How Prompts Are Sampled Without Leakage:** Sampled on Days 1–2 from held-out production query logs (anonymized, PII-stripped) or newly authored/curated test prompts by the engineering/reviewer team, **never** drawn from any candidate SFT training dataset.
 - **3-Layer Decontamination Protocol (Applied Before Any SFT Run):**
-  1. Freeze and record SHA-256 hashes of all `240` golden test prompts, `80` dev prompts, and `1,012` `FLORES-200` `devtest` sentences (`your-submission/partA/corpus/processed/`) on Day 2.
+  1. Freeze and record SHA-256 hashes of all `240` golden test prompts, `80` dev prompts, and `1,012` `FLORES-200` `devtest` sentences (`my-submission/partA/corpus/processed/`) on Day 2.
   2. Remove any SFT candidate that matches an eval prompt/reference under: (a) Unicode `NFC` + whitespace-normalized substring match, (b) **13-gram character/word overlap**, or (c) **5-gram MinHash Jaccard similarity $\ge 0.70$** (in both native script and Latin transliteration).
 
 ### 5.2 Exact Reviewer-Hour Arithmetic (Strictly $\le 10.0$ Combined Hours/Week Across Both Languages)
@@ -132,7 +132,7 @@ To avoid any ambiguity in the prompt's phrase *"a native-speaker reviewer (Hindi
    - **Deterministic Format Compliance Rate:** Pass rate of `json.loads()`, Markdown table column count check, and code-block delimiter check on Bucket 4 (`20` prompts/language) and the `80` English regression prompts.
    - **Sequence Length & Verbosity Profile:** P50/P95 generated token count (`gen_len`) and output-to-prompt token ratio using `FLM-4B-Instruct`'s actual `128k` tokenizer.
 2. **Auxiliary Translation Non-Regression Check (`FLORES-200` `devtest`):**
-   - **Task & Subset:** Zero-shot English $\rightarrow$ Hindi and English $\rightarrow$ Kannada sentence translation on the held-out `1,012` aligned sentences in `your-submission/partA/corpus/processed/{eng,hin,kan}.txt`.
+   - **Task & Subset:** Zero-shot English $\rightarrow$ Hindi and English $\rightarrow$ Kannada sentence translation on the held-out `1,012` aligned sentences in `my-submission/partA/corpus/processed/{eng,hin,kan}.txt`.
    - **Reference Format & Metric:** Single-reference, UTF-8 `NFC`-normalized target lines (`hin.txt`, `kan.txt`), scored via character 6-gram + word 2-gram F-score (`chrF++`, $\beta=2$) computed against the **Day-1 measured `Base FLM-4B-Instruct` baseline score** (used strictly to verify no cross-lingual regression; no baseline score is assumed in advance).
 
 ---

@@ -1,6 +1,6 @@
 # Part B — Capacity & Throughput Reconciliation Report (Audited)
 
-**Scripts & Data Files:** `your-submission/partB/{capacity_reconciliation.py, partB_calculation_output.txt, partB_reconciliation.json}`  
+**Scripts & Data Files:** `my-submission/partB/{capacity_reconciliation.py, partB_calculation_output.txt, partB_reconciliation.json}`  
 **Source Inputs Audited (Unmodified):** `bench/model_spec.md`, `bench/bench_log.csv`, `REPORT_v0.md` (Section 2)
 
 ---

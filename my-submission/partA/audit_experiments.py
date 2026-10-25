@@ -7,7 +7,7 @@ and corpus_sample/ (eng_sample.txt, hin_sample.txt) using tiktoken 'gpt2'.
 Does not modify any original starter-kit files.
 
 Usage:
-    .\.venv-x64\Scripts\python.exe your-submission/partA/audit_experiments.py
+    .\.venv-x64\Scripts\python.exe my-submission/partA/audit_experiments.py
 """
 
 import argparse

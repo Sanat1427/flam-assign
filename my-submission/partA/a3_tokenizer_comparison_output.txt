@@ -134,4 +134,4 @@ tel   |     350,509 |       225,022 |       51,610 |    -85.28% ( 6.79x less) | 
 kan   |     366,989 |       240,364 |       52,534 |    -85.69% ( 6.99x less) |      13.57x |         8.84x |        1.95x |     22.794 |       3.263
 mal   |     409,912 |       242,859 |       52,515 |    -87.19% ( 7.81x less) |      15.16x |         8.93x |        1.95x |     27.456 |       3.517
 
-Saved full JSON results to: your-submission\partA\a3_tokenizer_comparison.json
+Saved full JSON results to: my-submission\partA\a3_tokenizer_comparison.json

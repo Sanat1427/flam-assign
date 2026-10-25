@@ -1,7 +1,7 @@
 # Part A4 — Tokenizer Audit & Routing Memo (≤ 1 Page)
 
-**Canonical Memo:** `your-submission/partA/memo.md` *(identical copy at `your-submission/partA/a4_recommendation_memo.md`)*  
-**Full Evidence & Per-Language Tables:** `your-submission/partA/{a3_analysis.md, a3_tokenizer_comparison.json, audit_results.md, e1_e6_raw_output.txt, corpus_documentation.md}`
+**Canonical Memo:** `my-submission/partA/memo.md` *(identical copy at `my-submission/partA/a4_recommendation_memo.md`)*  
+**Full Evidence & Per-Language Tables:** `my-submission/partA/{a3_analysis.md, a3_tokenizer_comparison.json, audit_results.md, e1_e6_raw_output.txt, corpus_documentation.md}`
 
 ---
 
@@ -31,7 +31,7 @@
 ## 3. Practical Recommendations (Distinct from Measured Findings)
 
 1. **`gpt2` Fertility Alone Cannot Justify Separate Indic Routing—Nor Does Compression Alone Prove Unified Serving Is Sufficient:** `REPORT_v0.md`'s `gpt2` numbers reflect an obsolete 50k English-centric vocabulary and flawed script logic, and are **insufficient to justify a separate Indic routing pool**. However, **these static `tiktoken` compression results do not establish that a unified production deployment is sufficient**, as routing also depends on the production tokenizer, Indic model quality, output verbosity, and latency.
-2. **Benchmark `FLM-4B-Instruct`'s Exact Production Tokenizer on the Aligned Corpus:** We did not evaluate `FLM-4B-Instruct`'s `128k` tokenizer and do not assume it resembles `o200k_base`. Run `compare_tokenizers.py` with `FLM-4B-Instruct`'s exact production tokenizer on `your-submission/partA/corpus/processed/`, alongside Indic quality and latency benchmarks, before setting routing or capacity policy.
+2. **Benchmark `FLM-4B-Instruct`'s Exact Production Tokenizer on the Aligned Corpus:** We did not evaluate `FLM-4B-Instruct`'s `128k` tokenizer and do not assume it resembles `o200k_base`. Run `compare_tokenizers.py` with `FLM-4B-Instruct`'s exact production tokenizer on `my-submission/partA/corpus/processed/`, alongside Indic quality and latency benchmarks, before setting routing or capacity policy.
 
 ---
 

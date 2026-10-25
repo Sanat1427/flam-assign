@@ -1,7 +1,7 @@
 {
   "archive": {
     "url": "https://dl.fbaipublicfiles.com/nllb/flores200_dataset.tar.gz",
-    "archive_path": "your-submission\\partA\\corpus\\flores200_dataset.tar.gz",
+    "archive_path": "my-submission\\partA\\corpus\\flores200_dataset.tar.gz",
     "downloaded_now": false,
     "size_bytes": 25585843,
     "sha256": "b8b0b76783024b85797e5cc75064eb83fc5288b41e9654dabc7be6ae944011f6"
@@ -84,7 +84,7 @@
   },
   "raw_flores200": {
     "eng": {
-      "path": "your-submission\\partA\\corpus\\raw\\eng.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\eng.txt",
       "file_byte_size": 133108,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -114,7 +114,7 @@
       "bytes_per_codepoint": 1.0009851022232998
     },
     "hin": {
-      "path": "your-submission\\partA\\corpus\\raw\\hin.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\hin.txt",
       "file_byte_size": 338106,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -171,7 +171,7 @@
       "bytes_per_codepoint": 2.5716857772793507
     },
     "tam": {
-      "path": "your-submission\\partA\\corpus\\raw\\tam.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\tam.txt",
       "file_byte_size": 422653,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -216,7 +216,7 @@
       "bytes_per_codepoint": 2.7355660371237827
     },
     "tel": {
-      "path": "your-submission\\partA\\corpus\\raw\\tel.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\tel.txt",
       "file_byte_size": 354723,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -256,7 +256,7 @@
       "bytes_per_codepoint": 2.669416248443455
     },
     "kan": {
-      "path": "your-submission\\partA\\corpus\\raw\\kan.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\kan.txt",
       "file_byte_size": 376492,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -306,7 +306,7 @@
       "bytes_per_codepoint": 2.7181120602287536
     },
     "mal": {
-      "path": "your-submission\\partA\\corpus\\raw\\mal.txt",
+      "path": "my-submission\\partA\\corpus\\raw\\mal.txt",
       "file_byte_size": 412765,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -358,7 +358,7 @@
   },
   "processed_flores200": {
     "eng": {
-      "path": "your-submission\\partA\\corpus\\processed\\eng.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\eng.txt",
       "file_byte_size": 133108,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -388,7 +388,7 @@
       "bytes_per_codepoint": 1.0009851022232998
     },
     "hin": {
-      "path": "your-submission\\partA\\corpus\\processed\\hin.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\hin.txt",
       "file_byte_size": 338445,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -418,7 +418,7 @@
       "bytes_per_codepoint": 2.572407641758275
     },
     "tam": {
-      "path": "your-submission\\partA\\corpus\\processed\\tam.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\tam.txt",
       "file_byte_size": 422547,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -448,7 +448,7 @@
       "bytes_per_codepoint": 2.736689367724679
     },
     "tel": {
-      "path": "your-submission\\partA\\corpus\\processed\\tel.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\tel.txt",
       "file_byte_size": 354434,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -478,7 +478,7 @@
       "bytes_per_codepoint": 2.6728631282803685
     },
     "kan": {
-      "path": "your-submission\\partA\\corpus\\processed\\kan.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\kan.txt",
       "file_byte_size": 375976,
       "utf8_valid": true,
       "n_lines": 1012,
@@ -508,7 +508,7 @@
       "bytes_per_codepoint": 2.7240392299309844
     },
     "mal": {
-      "path": "your-submission\\partA\\corpus\\processed\\mal.txt",
+      "path": "my-submission\\partA\\corpus\\processed\\mal.txt",
       "file_byte_size": 412682,
       "utf8_valid": true,
       "n_lines": 1012,

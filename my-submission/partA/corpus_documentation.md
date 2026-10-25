@@ -23,7 +23,7 @@ To replace the 10-sentence non-parallel smoke-test files in `corpus_sample/`, we
 - **Archive SHA-256:** `b8b0b76783024b85797e5cc75064eb83fc5288b41e9654dabc7be6ae944011f6`
 - **Split Used:** `devtest` (`./flores200_dataset/devtest/<lang_script>.devtest` and `./flores200_dataset/metadata_devtest.tsv`)
 - **License & Usage Terms:** **CC-BY-SA 4.0** (Creative Commons Attribution-ShareAlike 4.0 International), matching the Wikimedia source articles from which FLORES-200 was professionally translated.
-- **Collection Method:** Automated, deterministic download and extraction via `your-submission/partA/build_corpus.py` using Python's standard `urllib.request` and `tarfile` modules.
+- **Collection Method:** Automated, deterministic download and extraction via `my-submission/partA/build_corpus.py` using Python's standard `urllib.request` and `tarfile` modules.
 - **Corpus Size & Document Provenance (from `metadata_devtest.tsv`):**
   - **Sentences per language:** `1,012` (strictly aligned 1-to-1 line-by-line across all 6 languages; `6,072` total sentences).
   - **Unique source documents (`URL`s):** `281` distinct English Wikimedia articles (approx. 3–4 contiguous sentences extracted per article).
@@ -37,14 +37,14 @@ To replace the 10-sentence non-parallel smoke-test files in `corpus_sample/`, we
 
 ## 3. Directory Structure & Preprocessing Pipeline
 
-Raw and processed text are stored in separate directories under `your-submission/partA/corpus/`:
+Raw and processed text are stored in separate directories under `my-submission/partA/corpus/`:
 
 - **Raw Text (Unmodified Upstream Bytes):**
-  - `your-submission/partA/corpus/raw/{eng,hin,tam,tel,kan,mal}.txt`
-  - `your-submission/partA/corpus/raw/metadata_devtest.tsv`
-  - `your-submission/partA/corpus/raw/README`
+  - `my-submission/partA/corpus/raw/{eng,hin,tam,tel,kan,mal}.txt`
+  - `my-submission/partA/corpus/raw/metadata_devtest.tsv`
+  - `my-submission/partA/corpus/raw/README`
 - **Processed / Normalized Text (Ready for Tokenizer Evaluation):**
-  - `your-submission/partA/corpus/processed/{eng,hin,tam,tel,kan,mal}.txt`
+  - `my-submission/partA/corpus/processed/{eng,hin,tam,tel,kan,mal}.txt`
 
 ### Preprocessing Rules Applied (`raw` $\rightarrow$ `processed`)
 1. **UTF-8 Decoding (`strict`):** Verified that every raw file is valid UTF-8 with `0` replacement characters (`U+FFFD`) and `0` C0/C1 control characters.
@@ -67,7 +67,7 @@ Raw and processed text are stored in separate directories under `your-submission
 | **`eng`** | `corpus_sample/eng_sample.txt` | `10` | `0` | `0` | `1` (`L07`) | `0` | `79` | `78` | `448` | `448` | `448` / `458` |
 | **`hin`** | `corpus_sample/hin_sample.txt` | `10` | `0` | `0` | `1` (`L10`) | `0` | `62` | `61` | `290` | `188` | `764` / `774` |
 
-### 4.2 Raw FLORES-200 `devtest` Corpus (`your-submission/partA/corpus/raw/`)
+### 4.2 Raw FLORES-200 `devtest` Corpus (`my-submission/partA/corpus/raw/`)
 | Lang | FLORES ID | Lines | Empty | Dups | UTF-8 Valid | Non-NFC Lines ($\Delta$ CP) | Multi-Space Lines (Phantom Words) | Words (`split(" ")`) | Words (`split()`) | Unicode Codepoints | Grapheme Clusters (`\X`) | UTF-8 Bytes (Lines / File) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`eng`** | `eng_Latn` | `1,012` | `0` | `0` | Yes | `0` (`+0`) | `0` (`+0`) | `21,901` | `21,901` | `131,966` | `131,966` | `132,096` / `133,108` |
@@ -77,7 +77,7 @@ Raw and processed text are stored in separate directories under `your-submission
 | **`kan`** | `kan_Knda` | `1,012` | `0` | `0` | Yes | `7` (`-13`) | `213` (`+477`) | `16,577` | `16,100` | `138,140` | `90,471` | `375,480` / `376,492` |
 | **`mal`** | `mal_Mlym` | `1,012` | `0` | `0` | Yes | `4` (`-4`) | `54` (`+71`) | `15,001` | `14,930` | `149,336` | `79,428` | `411,753` / `412,765` |
 
-### 4.3 Processed FLORES-200 `devtest` Corpus (`your-submission/partA/corpus/processed/`)
+### 4.3 Processed FLORES-200 `devtest` Corpus (`my-submission/partA/corpus/processed/`)
 | Lang | Script | Lines | Empty | Dups | Non-NFC | Multi-Space | Words (`split()`) | Unicode Codepoints | Non-Space Codepoints | Grapheme Clusters (`\X`) | UTF-8 Bytes (Lines / File) | Codepoints / Word | Graphemes / Word | UTF-8 Bytes / Word |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`eng`** | Latin | `1,012` | `0` | `0` | `0` | `0` | `21,901` | `131,966` | `111,077` | `131,966` | `132,096` / `133,108` | `6.03` | `6.03` | `6.03` |
@@ -104,5 +104,5 @@ While FLORES-200 `devtest` (`1,012` 6-way parallel sentences across `281` articl
 
 ```powershell
 # Rebuild raw and processed corpora and run full validation
-.\.venv-x64\Scripts\python.exe your-submission/partA/build_corpus.py
+.\.venv-x64\Scripts\python.exe my-submission/partA/build_corpus.py
 ```

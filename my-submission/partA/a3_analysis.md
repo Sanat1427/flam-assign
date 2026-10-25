@@ -31,7 +31,7 @@ Before running our 6-language comparison, Part A2 (`audit_experiments.py`, raw o
 - **E5 — Non-Parallel Sample Corpus:** `0/10` line indices in `eng_sample.txt` and `hin_sample.txt` align; only `5/10` lines have loose topical counterparts (`eng` L3,4,5,7,8 $\leftrightarrow$ `hin` L3,7,6,10,4; matched macro ratio `6.17×`, matched total token ratio `242/47 = 5.15×` vs. `459/99 = 4.64×`).
 - **E6 — Harmless/Correct Choices:** `random.seed(1337)` (`\Delta = 0`, deterministic BPE), `NFC` normalization (`\Delta = 0` on sample, though essential on raw FLORES-200 where `107` lines across `hin`/`tam`/`tel`/`kan`/`mal` are non-NFC), and `add_special_tokens=False` (`\Delta = 0` for `tiktoken`).
 
-All three tokenizers in Part A3 processed the **exact same 1,012 aligned sentences** (`IDs 1..1012`) per language from `your-submission/partA/corpus/processed/<lang>.txt` (UTF-8, NFC-normalized, consecutive internal whitespace collapsed to a single ASCII space `' '`, original casing preserved).
+All three tokenizers in Part A3 processed the **exact same 1,012 aligned sentences** (`IDs 1..1012`) per language from `my-submission/partA/corpus/processed/<lang>.txt` (UTF-8, NFC-normalized, consecutive internal whitespace collapsed to a single ASCII space `' '`, original casing preserved).
 
 ### 2.1 Explicit Metric Definitions
 For a corpus of $N = 1,012$ aligned sentences where sentence $i$ produces $T_i$ tokens and has $W_i$ whitespace-delimited words (`line.split()`), $C_i$ Unicode codepoints (`len(line)`), $G_i$ extended grapheme clusters (`len(regex.findall(r"\X", line))`), and $B_i$ UTF-8 bytes (`len(line.encode("utf-8"))`):
@@ -48,7 +48,7 @@ For a corpus of $N = 1,012$ aligned sentences where sentence $i$ produces $T_i$ 
    - $\text{Macro}(T/D) = \frac{1}{N} \sum_{i=1}^N \frac{T_i}{D_i}$ for denominator $D \in \{W, C, G, B\}$.
 3. **Rounding Convention:** All cross-language ratios and differences in `a3_tokenizer_comparison.json` and the tables below are computed from **exact unrounded IEEE-754 floats** before rounding for display.
 
-### 2.2 Verified Invariant Denominator Counts (`your-submission/partA/corpus/processed/`)
+### 2.2 Verified Invariant Denominator Counts (`my-submission/partA/corpus/processed/`)
 | Lang | Language | Script | Aligned Sentences ($N$) | Whitespace Words (`line.split()`) | Unicode Codepoints (`len(line)`) | Non-Space Codepoints | Extended Grapheme Clusters (`\X`) | UTF-8 Bytes (`len(line.encode('utf-8'))`) |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`eng`** | English | Latin | `1,012` | `21,901` | `131,966` | `111,077` | `131,966` | `132,096` |
@@ -168,11 +168,11 @@ All commands below were executed and verified from `c:\Users\TANNU\OneDrive\Desk
 
 ```powershell
 # 1. Run full Part A3 multi-tokenizer & multi-denominator comparison (writes JSON + stdout)
-.\.venv-x64\Scripts\python.exe your-submission/partA/compare_tokenizers.py
+.\.venv-x64\Scripts\python.exe my-submission/partA/compare_tokenizers.py
 
 # 2. Run unmodified starter-kit fertility.py on the 6 processed FLORES-200 languages (gpt2 vs o200k_base)
-.\.venv-x64\Scripts\python.exe fertility.py --corpus eng=your-submission/partA/corpus/processed/eng.txt --corpus hin=your-submission/partA/corpus/processed/hin.txt --corpus tam=your-submission/partA/corpus/processed/tam.txt --corpus tel=your-submission/partA/corpus/processed/tel.txt --corpus kan=your-submission/partA/corpus/processed/kan.txt --corpus mal=your-submission/partA/corpus/processed/mal.txt --tokenizer gpt2
+.\.venv-x64\Scripts\python.exe fertility.py --corpus eng=my-submission/partA/corpus/processed/eng.txt --corpus hin=my-submission/partA/corpus/processed/hin.txt --corpus tam=my-submission/partA/corpus/processed/tam.txt --corpus tel=my-submission/partA/corpus/processed/tel.txt --corpus kan=my-submission/partA/corpus/processed/kan.txt --corpus mal=my-submission/partA/corpus/processed/mal.txt --tokenizer gpt2
 
-.\.venv-x64\Scripts\python.exe fertility.py --corpus eng=your-submission/partA/corpus/processed/eng.txt --corpus hin=your-submission/partA/corpus/processed/hin.txt --corpus tam=your-submission/partA/corpus/processed/tam.txt --corpus tel=your-submission/partA/corpus/processed/tel.txt --corpus kan=your-submission/partA/corpus/processed/kan.txt --corpus mal=your-submission/partA/corpus/processed/mal.txt --tokenizer o200k_base
+.\.venv-x64\Scripts\python.exe fertility.py --corpus eng=my-submission/partA/corpus/processed/eng.txt --corpus hin=my-submission/partA/corpus/processed/hin.txt --corpus tam=my-submission/partA/corpus/processed/tam.txt --corpus tel=my-submission/partA/corpus/processed/tel.txt --corpus kan=my-submission/partA/corpus/processed/kan.txt --corpus mal=my-submission/partA/corpus/processed/mal.txt --tokenizer o200k_base
 ```
 *(Note: Running `fertility.py --tokenizer hf:xlm-roberta-base` was not executed to completion because `transformers` is not installed in `.venv-x64`, raising `ModuleNotFoundError: No module named 'transformers'`; therefore any Hugging Face tokenizer numbers remain unmeasured.)*

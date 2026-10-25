@@ -55,11 +55,12 @@ This repository executes a rigorous, reproducible audit across four deliverables
 
 ## 3. Repository Structure
 
-All original starter-kit files remain unmodified at the repository root. Completed audit artifacts reside in [`my-submission/`](my-submission/) (and are mirrored byte-for-byte in [`my-submission/`](my-submission/) for grading compatibility):
+All original starter-kit files remain unmodified at the repository root. All **37** completed audit artifacts reside in [`my-submission/`](my-submission/):
 
 ```text
 starter_kit/
 ├── README.md                                           # Visual, data-driven project documentation (this file)
+├── .gitignore                                          # Git ignore rules
 ├── REPORT_v0.md                                        # [Original Input] Flawed v0 leadership deck under audit
 ├── fertility.py                                        # [Original Input] Starter-kit tokenizer fertility script (v0)
 ├── corpus_sample/                                      # [Original Input] 10-line non-parallel smoke-test sample
@@ -69,45 +70,43 @@ starter_kit/
 │   ├── model_spec.md                                   # FLM-4B-Instruct (4.2B) & 1x NVIDIA L4 (24 GB) spec
 │   └── bench_log.csv                                   # 13-row empirical load-test log (short 512/256 & long 3584/512)
 │
-├── my-submission/                                    # [Canonical Submission Directory]
-│   ├── NOTEBOOK.md                                     # Chronological engineering lab notebook (Entries 1–14)
-│   ├── AI_USAGE.md                                     # AI tool usage disclosure & human verification log
-│   ├── FINAL_AUDIT_REPORT.md                           # Master rubric compliance & cross-file verification report
-│   ├── MENTOR_REPORT.md                                # Concise technical walkthrough for mentor/interview review
-│   │
-│   ├── partA/                                          # Part A: Multilingual Tokenizer Audit (50 pts)
-│   │   ├── memo.md                                     # A4: One-page executive tokenizer audit memo
-│   │   ├── a4_recommendation_memo.md                   # Byte-identical copy of memo.md
-│   │   ├── build_corpus.py                             # A1: Deterministic FLORES-200 devtest builder & validator
-│   │   ├── corpus_documentation.md                     # A1: Provenance, licensing (CC-BY-SA-4.0), & preprocessing
-│   │   ├── corpus_validation_output.txt                # A1: Console stdout of build_corpus.py
-│   │   ├── audit_experiments.py                        # A2: Single-variable controlled ablations E1–E6 on fertility.py
-│   │   ├── e1_e6_raw_output.txt                        # A2: Console stdout of audit_experiments.py
-│   │   ├── audit_results.md                            # A2: Detailed methodology & code audit report
-│   │   ├── compare_tokenizers.py                       # A3: 6-language x 3-tokenizer x 5-denominator benchmark
-│   │   ├── a3_tokenizer_comparison_output.txt          # A3: Console stdout of compare_tokenizers.py
-│   │   ├── a3_tokenizer_comparison.json                # A3: Full machine-readable benchmark telemetry
-│   │   ├── a3_analysis.md                              # A3: Cross-tokenizer & morphological analysis report
-│   │   └── corpus/
-│   │       ├── flores200_dataset.tar.gz                # Cached official NLLB FLORES-200 archive (25,585,843 B)
-│   │       ├── corpus_validation_summary.json          # Structured JSON validation metrics (sample, raw, processed)
-│   │       ├── raw/                                    # Unmodified upstream devtest files + metadata_devtest.tsv
-│   │       │   ├── {eng,hin,tam,tel,kan,mal}.txt       # 1,012 raw sentences per language
-│   │       │   ├── metadata_devtest.tsv                # Source URLs (281 articles), domains, and topic tags
-│   │       │   └── README                              # Upstream FLORES-200 archive README
-│   │       └── processed/                              # Normalized corpus (UTF-8, NFC, collapsed internal spaces, cased)
-│   │           └── {eng,hin,tam,tel,kan,mal}.txt       # 1,012 aligned sentences per language (6,072 total)
-│   │
-│   ├── partB/                                          # Part B: GPU Capacity & Throughput Reconciliation (20 pts)
-│   │   ├── capacity_reconciliation.py                  # B1–B3: First-principles KV-cache & 13-row benchmark verifier
-│   │   ├── partB_calculation_output.txt                # Console stdout of capacity_reconciliation.py
-│   │   ├── partB_reconciliation.json                   # Machine-readable capacity & sensitivity tables
-│   │   └── partB_report.md                             # Detailed technical report reconciling bench_log.csv
-│   │
-│   └── partC/                                          # Part C: Engineering Recommendation Memo (15 pts)
-│       └── memo.md                                     # Risk-adjusted 3-week plan (Option 3 primary + gated Option 1)
-│
-└── my-submission/                                      # Byte-for-byte identical mirror of my-submission/ (37 files)
+└── my-submission/                                      # [Canonical Submission Directory — 37 Files]
+    ├── NOTEBOOK.md                                     # Chronological engineering lab notebook (Entries 1–14)
+    ├── AI_USAGE.md                                     # AI tool usage disclosure & human verification log
+    ├── FINAL_AUDIT_REPORT.md                           # Master rubric compliance & cross-file verification report
+    ├── MENTOR_REPORT.md                                # Concise technical walkthrough for mentor/interview review
+    │
+    ├── partA/                                          # Part A: Multilingual Tokenizer Audit (50 pts)
+    │   ├── memo.md                                     # A4: One-page executive tokenizer audit memo
+    │   ├── a4_recommendation_memo.md                   # Byte-identical copy of memo.md
+    │   ├── build_corpus.py                             # A1: Deterministic FLORES-200 devtest builder & validator
+    │   ├── corpus_documentation.md                     # A1: Provenance, licensing (CC-BY-SA-4.0), & preprocessing
+    │   ├── corpus_validation_output.txt                # A1: Console stdout of build_corpus.py
+    │   ├── audit_experiments.py                        # A2: Single-variable controlled ablations E1–E6 on fertility.py
+    │   ├── e1_e6_raw_output.txt                        # A2: Console stdout of audit_experiments.py
+    │   ├── audit_results.md                            # A2: Detailed methodology & code audit report
+    │   ├── compare_tokenizers.py                       # A3: 6-language x 3-tokenizer x 5-denominator benchmark
+    │   ├── a3_tokenizer_comparison_output.txt          # A3: Console stdout of compare_tokenizers.py
+    │   ├── a3_tokenizer_comparison.json                # A3: Full machine-readable benchmark telemetry
+    │   ├── a3_analysis.md                              # A3: Cross-tokenizer & morphological analysis report
+    │   └── corpus/
+    │       ├── flores200_dataset.tar.gz                # Cached official NLLB FLORES-200 archive (25,585,843 B)
+    │       ├── corpus_validation_summary.json          # Structured JSON validation metrics (sample, raw, processed)
+    │       ├── raw/                                    # Unmodified upstream devtest files + metadata_devtest.tsv
+    │       │   ├── {eng,hin,tam,tel,kan,mal}.txt       # 1,012 raw sentences per language
+    │       │   ├── metadata_devtest.tsv                # Source URLs (281 articles), domains, and topic tags
+    │       │   └── README                              # Upstream FLORES-200 archive README
+    │       └── processed/                              # Normalized corpus (UTF-8, NFC, collapsed internal spaces, cased)
+    │           └── {eng,hin,tam,tel,kan,mal}.txt       # 1,012 aligned sentences per language (6,072 total)
+    │
+    ├── partB/                                          # Part B: GPU Capacity & Throughput Reconciliation (20 pts)
+    │   ├── capacity_reconciliation.py                  # B1–B3: First-principles KV-cache & 13-row benchmark verifier
+    │   ├── partB_calculation_output.txt                # Console stdout of capacity_reconciliation.py
+    │   ├── partB_reconciliation.json                   # Machine-readable capacity & sensitivity tables
+    │   └── partB_report.md                             # Detailed technical report reconciling bench_log.csv
+    │
+    └── partC/                                          # Part C: Engineering Recommendation Memo (15 pts)
+        └── memo.md                                     # Risk-adjusted 3-week plan (Option 3 primary + gated Option 1)
 ```
 
 ---
@@ -270,7 +269,7 @@ $$\text{KV bytes/token} = 2 \times \text{layers} \times \text{KV heads} \times \
 
 $$\text{KV bytes/token} = 2 \times 28 \times 8 \times 128 \times 2 = \mathbf{114{,}688\text{ bytes/token}} = \mathbf{112.0\text{ KiB/token}} \approx 0.114688\text{ MB/token}$$
 
-- ** Variable Definitions:**
+- **Variable Definitions:**
   - `2`: Key ($K$) and Value ($V$) state tensors stored per attention layer.
   - `layers` ($L = 28$): Number of transformer blocks in `FLM-4B-Instruct`.
   - `KV heads` ($n_{kv} = 8$): Number of Grouped-Query Attention key/value heads per layer *(Note: using $n_q = 24$ query heads is a common Multi-Head Attention error that overestimates KV size by $3\times$ at `344,064 B = 336 KiB/tok`)*.

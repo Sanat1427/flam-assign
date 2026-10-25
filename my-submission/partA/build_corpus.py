@@ -13,15 +13,15 @@ Extracts raw devtest files for 6 languages:
     - mal (mal_Mlym): Malayalam (Malayalam script, Dravidian)
 
 Saves unmodified raw files to:
-    your-submission/partA/corpus/raw/<lang>.txt
+    my-submission/partA/corpus/raw/<lang>.txt
 Saves normalized/processed files (UTF-8, NFC normalized, consecutive whitespace
 collapsed to single space, original casing preserved) to:
-    your-submission/partA/corpus/processed/<lang>.txt
+    my-submission/partA/corpus/processed/<lang>.txt
 
 Also validates starter_kit/corpus_sample/ alongside the raw and processed FLORES-200 corpora.
 
 Usage:
-    .\.venv-x64\Scripts\python.exe your-submission/partA/build_corpus.py
+    .\.venv-x64\Scripts\python.exe my-submission/partA/build_corpus.py
 """
 
 import argparse
@@ -209,7 +209,7 @@ def preprocess_line(line: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base-dir", default="your-submission/partA/corpus")
+    ap.add_argument("--base-dir", default="my-submission/partA/corpus")
     args = ap.parse_args()
 
     base_dir = Path(args.base_dir)
@@ -276,7 +276,7 @@ def main():
         )
 
     # Validate Raw FLORES-200 files
-    print("\n=== 4. RAW FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/raw/) ===")
+    print("\n=== 4. RAW FLORES-200 DEVTEST VALIDATION (my-submission/partA/corpus/raw/) ===")
     print(
         f"{'Lang':<6} | {'FLORES Code':<10} | {'Lines':>5} | {'Empty':>5} | {'Dups':>4} | {'NonNFC':>6} | {'MultiSpc':>8} | "
         f"{'Words(sp)':>9} | {'Words(ws)':>9} | {'Codepoints':>10} | {'Graphemes':>9} | {'UTF8 Bytes':>10}"
@@ -303,7 +303,7 @@ def main():
         )
 
     # Validate Processed FLORES-200 files
-    print("\n=== 5. PROCESSED FLORES-200 DEVTEST VALIDATION (your-submission/partA/corpus/processed/) ===")
+    print("\n=== 5. PROCESSED FLORES-200 DEVTEST VALIDATION (my-submission/partA/corpus/processed/) ===")
     print(
         f"{'Lang':<6} | {'Script':<10} | {'Lines':>5} | {'Empty':>5} | {'Dups':>4} | {'NonNFC':>6} | {'MultiSpc':>8} | "
         f"{'Words':>8} | {'Codepoints':>10} | {'Graphemes':>9} | {'UTF8 Bytes':>10} | {'CP/Word':>7} | {'Grapheme/W':>10}"

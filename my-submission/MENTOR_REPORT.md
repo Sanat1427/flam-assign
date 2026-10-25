@@ -3,7 +3,7 @@
 **Prepared For:** Engineering Mentor / Technical Reviewer  
 **Prepared By:** AI Team Intern  
 **Date:** 2026-10-24  
-**Canonical Submission Directory:** `your-submission/` *(mirrored byte-for-byte in `my-submission/`)*  
+**Canonical Submission Directory:** `my-submission/` (`37` files)  
 **Status:** Complete, Reconciled Against Original Source Files, and Ready for Review
 
 ---
@@ -17,14 +17,14 @@ The assignment (**“The Audit”**) places us in the role of an AI engineering 
 3. **Part C (Engineering Recommendation):** The product team wants assistant replies in Indian languages (`Hindi, Kannada, Tamil, Telugu, Bengali, Marathi`) to sound natural and conversational rather than formal/textbook, under strict constraints: **1× NVIDIA A100 80 GB GPU**, **2 weeks** for implementation and evaluation (**launch review in 3 weeks**), **native-speaker reviewer coverage for Hindi + Kannada only (`10 hours/week`)**, and a **`$0` external API budget**.
 
 ### 2. Summary of Work Investigated and Delivered
-Across `your-submission/`, we delivered reproducible scripts, machine-readable JSON outputs, raw execution logs, and concise engineering memos:
-- **Part A (`your-submission/partA/`):**
+Across `my-submission/`, we delivered reproducible scripts, machine-readable JSON outputs, raw execution logs, and concise engineering memos:
+- **Part A (`my-submission/partA/`):**
   - Assembled a **6-language, 1,012-sentence aligned parallel corpus** (`6,072` total sentences across English `eng`, Hindi `hin`, Tamil `tam`, Telugu `tel`, Kannada `kan`, and Malayalam `mal`) from official **FLORES-200 (`devtest`)** (`build_corpus.py`, `corpus_documentation.md`).
   - Conducted controlled single-variable experiments (`E1–E6`) isolating every implementation and methodological flaw in `fertility.py` and `corpus_sample/` (`audit_experiments.py`, `audit_results.md`).
   - Benchmarked three `tiktoken` byte-level BPE encodings (`gpt2` [`50,257` vocab], `cl100k_base` [`100,277` vocab], and `o200k_base` [`200,019` vocab]) across five denominators (`compare_tokenizers.py`, `a3_tokenizer_comparison.json`, `a3_analysis.md`) and synthesized a 1-page routing memo (`partA/memo.md`).
-- **Part B (`your-submission/partB/`):**
+- **Part B (`my-submission/partB/`):**
   - Built an automated capacity and throughput reconciliation pipeline (`capacity_reconciliation.py`, `partB_reconciliation.json`, `partB_report.md`) auditing all 13 rows of `bench/bench_log.csv` against `bench/model_spec.md`.
-- **Part C & Supporting Documentation (`your-submission/partC/memo.md`, `NOTEBOOK.md`, `AI_USAGE.md`, `FINAL_AUDIT_REPORT.md`):**
+- **Part C & Supporting Documentation (`my-submission/partC/memo.md`, `NOTEBOOK.md`, `AI_USAGE.md`, `FINAL_AUDIT_REPORT.md`):**
   - Designed an evidence-gated 3-week engineering and evaluation plan (`partC/memo.md`), maintained a 14-entry chronological lab notebook (`NOTEBOOK.md`), and documented where AI tooling helped and where initial AI assumptions required human correction (`AI_USAGE.md`).
 
 ### 3. Headline Findings & Recommended Engineering Direction
@@ -53,7 +53,7 @@ Across `your-submission/`, we delivered reproducible scripts, machine-readable J
 
 ---
 
-## B. Part A — Tokenizer Audit (`your-submission/partA/`)
+## B. Part A — Tokenizer Audit (`my-submission/partA/`)
 
 ### 1. Flaws Identified in `fertility.py` and `corpus_sample/` (`audit_experiments.py` & `audit_results.md`)
 We ran controlled single-variable experiments (`E1–E6`) against the unmodified `fertility.py` baseline on the 10-line `corpus_sample/eng_sample.txt` and `corpus_sample/hin_sample.txt` files:
@@ -71,7 +71,7 @@ We ran controlled single-variable experiments (`E1–E6`) against the unmodified
 ### 2. Multilingual Evaluation Corpus (`build_corpus.py` & `corpus_documentation.md`)
 - **Source & Provenance:** Official **FLORES-200 `devtest` split** (`flores200_dataset.tar.gz`, `25,585,843` bytes, SHA-256 `b8b0b76783024b85797e5cc75064eb83fc5288b41e9654dabc7be6ae944011f6`), licensed under **CC-BY-SA 4.0**.
 - **Scale & Alignment:** **1,012 strictly aligned parallel sentences per language** (`6,072` sentences total across `281` Wikimedia source articles: `34.68%` WikiBooks, `33.70%` WikiNews, `31.62%` WikiVoyage) covering **English (`eng_Latn`)**, **Hindi (`hin_Deva`)**, **Tamil (`tam_Taml`)**, **Telugu (`tel_Telu`)**, **Kannada (`kan_Knda`)**, and **Malayalam (`mal_Mlym`)**.
-- **Preprocessing (`your-submission/partA/corpus/processed/`):** Strict UTF-8 validation (`0` replacement/control chars), line stripping, **Unicode `NFC` normalization** (which canonically decomposes legacy Devanagari nukta singletons `U+0958–U+095F` on `93` Hindi lines [`+122` codepoints] and composes split vowel signs on `14` Dravidian lines), **internal whitespace collapsing** (`" ".join(line.split())`, fixing `6` `hin`, `75` `tam`, `136` `tel`, `213` `kan`, and `54` `mal` multi-space lines), and **original casing preserved**.
+- **Preprocessing (`my-submission/partA/corpus/processed/`):** Strict UTF-8 validation (`0` replacement/control chars), line stripping, **Unicode `NFC` normalization** (which canonically decomposes legacy Devanagari nukta singletons `U+0958–U+095F` on `93` Hindi lines [`+122` codepoints] and composes split vowel signs on `14` Dravidian lines), **internal whitespace collapsing** (`" ".join(line.split())`, fixing `6` `hin`, `75` `tam`, `136` `tel`, `213` `kan`, and `54` `mal` multi-space lines), and **original casing preserved**.
 - **Corpus Limitations:** (1) Formal translated Wikimedia prose (a proxy for comparable message content, not mathematically identical propositions due to translationese and minor translator edits); (2) excludes **Romanized/code-switched chat (Hinglish/Tanglish/Kanglish)**, conversational imperatives, and JSON/code; (3) retains minor upstream FLORES-200 CSV-escaped quote artifacts (`""` on `58–68` `tam`/`tel`/`mal` lines) so extraction remains 100% deterministic.
 
 ### 3. Multi-Tokenizer & Multi-Denominator Comparison (`compare_tokenizers.py` & `a3_analysis.md`)
@@ -98,11 +98,11 @@ We ran controlled single-variable experiments (`E1–E6`) against the unmodified
    - The `1.57×–1.98×` `o200k_base` values are **static token-count-per-aligned-sentence ratios**, **not** serving-cost multipliers. Lower token counts reduce static sequence length and per-sentence KV footprint for a fixed text, but they do **not** measure downstream language modeling quality, factual accuracy, generated-output verbosity/repetition loops, or end-to-end latency.
    - Therefore, while `REPORT_v0.md`'s `gpt2` numbers are insufficient to justify a separate Indic serving pool, **static `tiktoken` compression alone does not prove that a unified production deployment is sufficient**.
 3. **Why the Production Tokenizer Must Be Benchmarked First:**
-   - We did **not** test `FLM-4B-Instruct`'s `128k` tokenizer (`bench/model_spec.md:L13`) and must not assume it behaves like `o200k_base` (`200k`). Benchmarking `FLM-4B-Instruct`'s exact production tokenizer on `your-submission/partA/corpus/processed/` is mandatory before making routing or capacity commitments.
+   - We did **not** test `FLM-4B-Instruct`'s `128k` tokenizer (`bench/model_spec.md:L13`) and must not assume it behaves like `o200k_base` (`200k`). Benchmarking `FLM-4B-Instruct`'s exact production tokenizer on `my-submission/partA/corpus/processed/` is mandatory before making routing or capacity commitments.
 
 ---
 
-## C. Part B — Capacity Reconciliation (`your-submission/partB/`)
+## C. Part B — Capacity Reconciliation (`my-submission/partB/`)
 
 ### 1. Serving Model and Hardware Assumptions (`bench/model_spec.md`)
 From `bench/model_spec.md` (with undocumented parameters such as the serving engine, PagedAttention block size, preemption mode `recompute` vs. `swap`, and prefix-caching flags explicitly listed as unspecified):
@@ -169,7 +169,7 @@ From `bench/model_spec.md` (with undocumented parameters such as the serving eng
 
 ---
 
-## D. Part C — Engineering Recommendation (`your-submission/partC/memo.md`)
+## D. Part C — Engineering Recommendation (`my-submission/partC/memo.md`)
 
 ### 1. Comparison of the Three Candidate Approaches Under Assignment Constraints
 Constraints: **`1× NVIDIA A100 80 GB` (R&D)**, **`1× NVIDIA L4 24 GB` (Production Serving)**, **2 weeks implementation + evaluation (launch review in 3 weeks)**, **native-speaker reviewer (`Hindi + Kannada only`, `10 hours/week`)**, and **`$0` external API budget**.
@@ -186,7 +186,7 @@ Constraints: **`1× NVIDIA A100 80 GB` (R&D)**, **`1× NVIDIA L4 24 GB` (Product
 3. **Strict Six-Language Scope Rule (`hin, kan` vs. `tam, tel, ben, mar`):** Although the product team requested casualization across 6 languages (`Hindi, Kannada, Tamil, Telugu, Bengali, Marathi`), human reviewer coverage exists **only for Hindi and Kannada**. Because conversational register ("casual vs. textbook") and agglutinative grammar cannot be validated by regexes alone, **Week 3 launch and any SFT promotion are scoped strictly to Hindi and Kannada**; `tam, tel, ben, mar` remain on the base configuration behind a feature flag until native reviewer coverage is allocated.
 
 ### 3. Back-of-Envelope Arithmetic, Reviewer Schedule, Kill Gates, and Day-1 Experiment
-- **Day-1 First Experiment:** Run `compare_tokenizers.py` with `FLM-4B-Instruct`'s actual `128k` production tokenizer on the `1,012` aligned `FLORES-200` `devtest` sentences (`your-submission/partA/corpus/processed/{eng,hin,kan,tam,tel,mal}.txt`) to measure its true token-count-per-aligned-sentence ratio, and generate a `20`-prompt baseline sample (`Base` vs. draft `Option 3` system prompt) in Hindi and Kannada.
+- **Day-1 First Experiment:** Run `compare_tokenizers.py` with `FLM-4B-Instruct`'s actual `128k` production tokenizer on the `1,012` aligned `FLORES-200` `devtest` sentences (`my-submission/partA/corpus/processed/{eng,hin,kan,tam,tel,mal}.txt`) to measure its true token-count-per-aligned-sentence ratio, and generate a `20`-prompt baseline sample (`Base` vs. draft `Option 3` system prompt) in Hindi and Kannada.
 - **Analytical Training Estimate on `1× A100 80 GB` (Explicitly Labeled as Unexecuted Estimate):** For a proposed target mixture of `15,000–30,000` decontaminated examples (`40%` Kannada, `35%` Hindi, `25%` English replay buffer; `2` epochs $\approx 30\text{M}–60\text{M}$ tokens at $S \le 2048$), `bf16`/`fp16` LoRA ($r=16, \alpha=32$) with gradient checkpointing is estimated to use **`~18–26 GB` VRAM** (`8.4 GB` base weights + `~1–2 GB` LoRA AdamW/grad states + `~8–16 GB` activations) and **`~3–6 GPU-hours/run`** at `~3,000–5,000 tok/s`.
 - **Golden Evaluation Set & 3-Layer Decontamination (Frozen Day 2):** `240` golden test prompts (`80` Hindi + `80` Kannada + `80` English regression, stratified into 4 buckets $\times$ `20` prompts: native-script QA, multi-step instructions, Romanized Hinglish/Kanglish, and JSON/table/code formatting) plus a disjoint `40` Hindi + `40` Kannada dev split. All candidate SFT data is decontaminated via SHA-256 hash freeze, `NFC` substring match, 13-gram overlap, and 5-gram MinHash Jaccard $\ge 0.70$.
 - **Exact Reviewer-Hour Arithmetic ($\le 10.0$ Hours/Week Cap — Verified Both Per-Reviewer and Combined):**
@@ -203,9 +203,9 @@ Constraints: **`1× NVIDIA A100 80 GB` (R&D)**, **`1× NVIDIA L4 24 GB` (Product
 
 ## E. Complete Submission Map, Reproducibility Commands, and Status
 
-### 1. Canonical File Inventory (`your-submission/`)
+### 1. Canonical File Inventory (`my-submission/`)
 
-| Path (Relative to `your-submission/`) | Description | Status |
+| Path (Relative to `my-submission/`) | Description | Status |
 | :--- | :--- | :---: |
 | `MENTOR_REPORT.md` | *This mentor-ready technical summary report* | **Complete** |
 | `FINAL_AUDIT_REPORT.md` | Comprehensive rubric reconciliation, verification tables, and 10 oral-defense Q&As | **Complete** |
@@ -222,16 +222,16 @@ Constraints: **`1× NVIDIA A100 80 GB` (R&D)**, **`1× NVIDIA L4 24 GB` (Product
 
 ```powershell
 # 1. Part A1: Verify FLORES-200 corpus integrity and NFC/whitespace normalization summary
-.\.venv-x64\Scripts\python.exe your-submission/partA/build_corpus.py
+.\.venv-x64\Scripts\python.exe my-submission/partA/build_corpus.py
 
 # 2. Part A2: Run controlled E1-E6 single-variable ablations on fertility.py & corpus_sample/
-.\.venv-x64\Scripts\python.exe your-submission/partA/audit_experiments.py
+.\.venv-x64\Scripts\python.exe my-submission/partA/audit_experiments.py
 
 # 3. Part A3: Run 3-tokenizer (gpt2, cl100k_base, o200k_base) x 5-denominator comparison on 6,072 sentences
-.\.venv-x64\Scripts\python.exe your-submission/partA/compare_tokenizers.py
+.\.venv-x64\Scripts\python.exe my-submission/partA/compare_tokenizers.py
 
 # 4. Part B: Run KV-cache capacity and 13-row throughput reconciliation on bench/model_spec.md & bench/bench_log.csv
-.\.venv-x64\Scripts\python.exe your-submission/partB/capacity_reconciliation.py
+.\.venv-x64\Scripts\python.exe my-submission/partB/capacity_reconciliation.py
 ```
 
 ### 3. Current Readiness Status

@@ -25,7 +25,7 @@ corrected cased micro/macro metrics across five denominators:
   - Parallel sentence (`N = 1,012` aligned propositions)
 
 Usage:
-    .\.venv-x64\Scripts\python.exe your-submission/partA/compare_tokenizers.py
+    .\.venv-x64\Scripts\python.exe my-submission/partA/compare_tokenizers.py
 """
 
 import argparse
@@ -164,9 +164,9 @@ def evaluate_corpus(lines: list[str], encode_fn, lowercase: bool = False, split_
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--corpus-dir", default="your-submission/partA/corpus/processed")
-    ap.add_argument("--raw-corpus-dir", default="your-submission/partA/corpus/raw")
-    ap.add_argument("--out-json", default="your-submission/partA/a3_tokenizer_comparison.json")
+    ap.add_argument("--corpus-dir", default="my-submission/partA/corpus/processed")
+    ap.add_argument("--raw-corpus-dir", default="my-submission/partA/corpus/raw")
+    ap.add_argument("--out-json", default="my-submission/partA/a3_tokenizer_comparison.json")
     args = ap.parse_args()
 
     corpus_dir = Path(args.corpus_dir)
