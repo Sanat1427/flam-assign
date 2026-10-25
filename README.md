@@ -46,16 +46,16 @@ This repository executes a rigorous, reproducible audit across four deliverables
 
 | Component | Weight | Core Audit Objective | Primary Deliverables |
 | :--- | :---: | :--- | :--- |
-| **Part A — Tokenizer Audit** | **50 pts** | Build a clean $\ge 500$-sentence multi-way parallel Indic+English corpus (**A1**); run controlled single-variable ablations (`E1–E6`) on [`fertility.py`](fertility.py) (**A2**); benchmark multiple tokenizers across 5 denominators (**A3**); write a 1-page leadership memo (**A4**). | [`build_corpus.py`](your-submission/partA/build_corpus.py), [`audit_experiments.py`](your-submission/partA/audit_experiments.py), [`compare_tokenizers.py`](your-submission/partA/compare_tokenizers.py), [`partA/memo.md`](your-submission/partA/memo.md) |
-| **Part B — Capacity Reconciliation** | **20 pts** | Derive KV-cache memory from first principles using [`bench/model_spec.md`](bench/model_spec.md) (**B1**); reconcile all 13 rows of [`bench/bench_log.csv`](bench/bench_log.csv), expose the `reported_tok_s` metric flaw, and explain preemptions at $B=32, 48$ (**B2–B3**). | [`capacity_reconciliation.py`](your-submission/partB/capacity_reconciliation.py), [`partB_report.md`](your-submission/partB/partB_report.md), [`partB_reconciliation.json`](your-submission/partB/partB_reconciliation.json) |
-| **Part C — Engineering Recommendation** | **15 pts** | Evaluate Supervised Fine-Tuning (SFT), a $\le 1\text{B}$ rewriter model, and prompt engineering under strict compute, reviewer, timeline, and `$0` API constraints. | [`partC/memo.md`](your-submission/partC/memo.md) |
-| **Lab Notebook & AI Disclosure** | **15 pts** | Maintain a chronological engineering lab notebook of hypotheses, commands, dead ends, and verifications, plus a transparent audit of AI tool errors caught and fixed. | [`NOTEBOOK.md`](your-submission/NOTEBOOK.md), [`AI_USAGE.md`](your-submission/AI_USAGE.md), [`FINAL_AUDIT_REPORT.md`](your-submission/FINAL_AUDIT_REPORT.md) |
+| **Part A — Tokenizer Audit** | **50 pts** | Build a clean $\ge 500$-sentence multi-way parallel Indic+English corpus (**A1**); run controlled single-variable ablations (`E1–E6`) on [`fertility.py`](fertility.py) (**A2**); benchmark multiple tokenizers across 5 denominators (**A3**); write a 1-page leadership memo (**A4**). | [`build_corpus.py`](my-submission/partA/build_corpus.py), [`audit_experiments.py`](my-submission/partA/audit_experiments.py), [`compare_tokenizers.py`](my-submission/partA/compare_tokenizers.py), [`partA/memo.md`](my-submission/partA/memo.md) |
+| **Part B — Capacity Reconciliation** | **20 pts** | Derive KV-cache memory from first principles using [`bench/model_spec.md`](bench/model_spec.md) (**B1**); reconcile all 13 rows of [`bench/bench_log.csv`](bench/bench_log.csv), expose the `reported_tok_s` metric flaw, and explain preemptions at $B=32, 48$ (**B2–B3**). | [`capacity_reconciliation.py`](my-submission/partB/capacity_reconciliation.py), [`partB_report.md`](my-submission/partB/partB_report.md), [`partB_reconciliation.json`](my-submission/partB/partB_reconciliation.json) |
+| **Part C — Engineering Recommendation** | **15 pts** | Evaluate Supervised Fine-Tuning (SFT), a $\le 1\text{B}$ rewriter model, and prompt engineering under strict compute, reviewer, timeline, and `$0` API constraints. | [`partC/memo.md`](my-submission/partC/memo.md) |
+| **Lab Notebook & AI Disclosure** | **15 pts** | Maintain a chronological engineering lab notebook of hypotheses, commands, dead ends, and verifications, plus a transparent audit of AI tool errors caught and fixed. | [`NOTEBOOK.md`](my-submission/NOTEBOOK.md), [`AI_USAGE.md`](my-submission/AI_USAGE.md), [`FINAL_AUDIT_REPORT.md`](my-submission/FINAL_AUDIT_REPORT.md) |
 
 ---
 
 ## 3. Repository Structure
 
-All original starter-kit files remain unmodified at the repository root. Completed audit artifacts reside in [`your-submission/`](your-submission/) (and are mirrored byte-for-byte in [`my-submission/`](my-submission/) for grading compatibility):
+All original starter-kit files remain unmodified at the repository root. Completed audit artifacts reside in [`my-submission/`](my-submission/) (and are mirrored byte-for-byte in [`my-submission/`](my-submission/) for grading compatibility):
 
 ```text
 starter_kit/
@@ -69,7 +69,7 @@ starter_kit/
 │   ├── model_spec.md                                   # FLM-4B-Instruct (4.2B) & 1x NVIDIA L4 (24 GB) spec
 │   └── bench_log.csv                                   # 13-row empirical load-test log (short 512/256 & long 3584/512)
 │
-├── your-submission/                                    # [Canonical Submission Directory]
+├── my-submission/                                    # [Canonical Submission Directory]
 │   ├── NOTEBOOK.md                                     # Chronological engineering lab notebook (Entries 1–14)
 │   ├── AI_USAGE.md                                     # AI tool usage disclosure & human verification log
 │   ├── FINAL_AUDIT_REPORT.md                           # Master rubric compliance & cross-file verification report
@@ -107,7 +107,7 @@ starter_kit/
 │   └── partC/                                          # Part C: Engineering Recommendation Memo (15 pts)
 │       └── memo.md                                     # Risk-adjusted 3-week plan (Option 3 primary + gated Option 1)
 │
-└── my-submission/                                      # Byte-for-byte identical mirror of your-submission/ (37 files)
+└── my-submission/                                      # Byte-for-byte identical mirror of my-submission/ (37 files)
 ```
 
 ---
@@ -119,26 +119,26 @@ starter_kit/
 ```mermaid
 flowchart TD
     subgraph Phase1["1. Corpus Acquisition & Hygiene (Part A1)"]
-        A1["Official NLLB FLORES-200 Archive (25,585,843 B | SHA-256 Verified)"] --> A2["Extract Raw devtest: 6 Langs x 1,012 Lines (your-submission/partA/corpus/raw/)"]
+        A1["Official NLLB FLORES-200 Archive (25,585,843 B | SHA-256 Verified)"] --> A2["Extract Raw devtest: 6 Langs x 1,012 Lines (my-submission/partA/corpus/raw/)"]
         A2 --> A3["Preprocess: strip() + Unicode NFC + Collapse Multi-Spaces + Preserve Casing"]
-        A3 --> A4["Validated 6-Way Parallel Corpus (your-submission/partA/corpus/processed/)"]
+        A3 --> A4["Validated 6-Way Parallel Corpus (my-submission/partA/corpus/processed/)"]
     end
 
     subgraph Phase2["2. Methodology & Tokenizer Audit (Part A2 & A3)"]
         B1["Starter Sample & fertility.py (eng_sample.txt, hin_sample.txt)"] --> B2["Controlled Ablations E1-E6 (audit_experiments.py)"]
         A4 --> B3["Multi-Tokenizer Benchmark: gpt2 (50k) vs cl100k (100k) vs o200k (200k) (compare_tokenizers.py)"]
-        B2 & B3 --> B4["Part A Audit Memo (your-submission/partA/memo.md)"]
+        B2 & B3 --> B4["Part A Audit Memo (my-submission/partA/memo.md)"]
     end
 
     subgraph Phase3["3. GPU Capacity & Log Reconciliation (Part B)"]
         C1["Hardware & Model Spec: FLM-4B-Instruct on 1x L4 24 GB (bench/model_spec.md)"] --> C2["First-Principles GQA KV Math: 114,688 B/tok (112 KiB/tok) | 12.08 GB Idealized KV Pool"]
         C3["Empirical Load Test: 13 Rows (bench/bench_log.csv)"] --> C4["Reconcile Total vs Decode Tok/s & Preemptions at B=32 (7) and B=48 (23) (capacity_reconciliation.py)"]
-        C2 & C4 --> C5["Part B Technical Report (your-submission/partB/partB_report.md)"]
+        C2 & C4 --> C5["Part B Technical Report (my-submission/partB/partB_report.md)"]
     end
 
     subgraph Phase4["4. Launch Strategy Synthesis (Part C)"]
         B4 & C5 --> D1["Constrained Engineering Trade-Off Analysis (1x A100 80GB | 2 Wks | 10 Reviewer Hrs/Wk | $0 API)"]
-        D1 --> D2["Stage 1: Concise System Prompt (<=128 tok) | Stage 2: Gated LoRA SFT | Reject: <=1B Rewriter (your-submission/partC/memo.md)"]
+        D1 --> D2["Stage 1: Concise System Prompt (<=128 tok) | Stage 2: Gated LoRA SFT | Reject: <=1B Rewriter (my-submission/partC/memo.md)"]
     end
 ```
 
@@ -180,7 +180,7 @@ flowchart LR
 ```
 
 ### 5.1 Part A1 — FLORES-200 Parallel Corpus Construction & Validation
-The starter kit's [`corpus_sample/`](corpus_sample/) contains only `10` lines per language, has **`0/10` line-index alignment**, and leaves `5/10` sentences with no semantic counterpart in the other file. To establish a rigorous benchmark, [`build_corpus.py`](your-submission/partA/build_corpus.py) extracts the official **FLORES-200 `devtest`** split (`1,012` human-translated multi-way parallel sentences per language across `281` Wikimedia articles under `CC-BY-SA-4.0`) across **6 languages** spanning 2 language families and 6 scripts:
+The starter kit's [`corpus_sample/`](corpus_sample/) contains only `10` lines per language, has **`0/10` line-index alignment**, and leaves `5/10` sentences with no semantic counterpart in the other file. To establish a rigorous benchmark, [`build_corpus.py`](my-submission/partA/build_corpus.py) extracts the official **FLORES-200 `devtest`** split (`1,012` human-translated multi-way parallel sentences per language across `281` Wikimedia articles under `CC-BY-SA-4.0`) across **6 languages** spanning 2 language families and 6 scripts:
 
 | Code | FLORES ID | Language | Family & Morphological Typology | Script | Lines | Words (`split()`) | Unicode Codepoints | Graphemes (`\X`) | UTF-8 Line Bytes | CP / Word | Graphemes / Word | Bytes / Codepoint |
 | :--- | :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -192,14 +192,14 @@ The starter kit's [`corpus_sample/`](corpus_sample/) contains only `10` lines pe
 | **`mal`** | `mal_Mlym` | Malayalam | Dravidian (Highly Agglutinative) | Malayalam | `1,012` | `14,930` | `149,261` | `79,357` | `411,670` | `10.00` | `5.32` | `2.7581` |
 
 #### Before-vs-After Preprocessing Hygiene (`raw/` vs. `processed/`)
-Inspecting the unmodified upstream FLORES-200 files in [`your-submission/partA/corpus/raw/`](your-submission/partA/corpus/raw/) revealed two upstream anomalies that [`build_corpus.py`](your-submission/partA/build_corpus.py) deterministically resolves in [`your-submission/partA/corpus/processed/`](your-submission/partA/corpus/processed/):
+Inspecting the unmodified upstream FLORES-200 files in [`my-submission/partA/corpus/raw/`](my-submission/partA/corpus/raw/) revealed two upstream anomalies that [`build_corpus.py`](my-submission/partA/build_corpus.py) deterministically resolves in [`my-submission/partA/corpus/processed/`](my-submission/partA/corpus/processed/):
 1. **Consecutive Internal Spaces (`"  "`):** Present in **`213` Kannada lines** (`+477` phantom empty words under `split(" ")`), **`136` Telugu lines** (`+274` phantom words), **`75` Tamil lines** (`+100`), **`54` Malayalam lines** (`+71`), and **`6` Hindi lines** (`+27`), versus `0` in English. Collapsing internal whitespace via `" ".join(s.split())` eliminates all `949` phantom words across the corpus.
 2. **Non-NFC Unicode Sequences (`107` lines total):**
    - In raw Hindi (`hin_Deva.devtest`), **`93` lines** contain precomposed Devanagari *nukta* singletons (`U+0958`–`U+095F`, such as `U+095B` `ज़` and `U+095C` `ड़`), which are **Unicode Canonical Composition Exclusions** that canonically decompose under `NFC` into base consonant + `U+093C` combining nukta (`+122` codepoints across those `93` lines).
    - In raw Dravidian files, **`14` lines** (`7` `kan`, `4` `mal`, `2` `tam`, `1` `tel`) contain decomposed two-part vowel signs that canonically compose under `NFC` (`-13` codepoints in `kan`, `-5` in `tel`, `-4` in `mal`, `-2` in `tam`).
 
 ### 5.2 Part A2 — Controlled Ablations (`E1–E6`) on `fertility.py`
-Running [`audit_experiments.py`](your-submission/partA/audit_experiments.py) isolates each methodological flaw in [`fertility.py`](fertility.py) on the 10-line starter sample (full output in [`e1_e6_raw_output.txt`](your-submission/partA/e1_e6_raw_output.txt) and [`audit_results.md`](your-submission/partA/audit_results.md)):
+Running [`audit_experiments.py`](my-submission/partA/audit_experiments.py) isolates each methodological flaw in [`fertility.py`](fertility.py) on the 10-line starter sample (full output in [`e1_e6_raw_output.txt`](my-submission/partA/e1_e6_raw_output.txt) and [`audit_results.md`](my-submission/partA/audit_results.md)):
 
 | Experiment | Single Variable Changed vs. Baseline (`fertility.py`) | Measured `eng` Fertility | Measured `hin` Fertility | `hin / eng` Fertility Ratio | Key Technical Finding |
 | :--- | :--- | :---: | :---: | :---: | :--- |
@@ -214,7 +214,7 @@ Running [`audit_experiments.py`](your-submission/partA/audit_experiments.py) iso
 | **Combined Fix** | `split()` + Cased + Micro-average on 10-line sample | `1.2308` (`1.23`) | `7.5246` (`7.52`) | **`6.1137×` (`6.11×`, `+3.85%`)** | Fixing all code bugs simultaneously shifts the sample fertility ratio from `5.89×` to `6.11×` and `tok/char` ratio from `7.00×` to `7.39×` (`+5.54%`). |
 
 ### 5.3 Part A3 — Multi-Tokenizer Comparison (`gpt2` vs. `cl100k_base` vs. `o200k_base`)
-Running [`compare_tokenizers.py`](your-submission/partA/compare_tokenizers.py) across all `1,012` aligned FLORES-200 sentences per language (`6,072` total sentences) directly refutes [`REPORT_v0.md`](REPORT_v0.md)'s claim that *"any tokenizer will struggle"*:
+Running [`compare_tokenizers.py`](my-submission/partA/compare_tokenizers.py) across all `1,012` aligned FLORES-200 sentences per language (`6,072` total sentences) directly refutes [`REPORT_v0.md`](REPORT_v0.md)'s claim that *"any tokenizer will struggle"*:
 
 | Language | `gpt2` Tokens (`50k` vocab) | `cl100k_base` Tokens (`100k` vocab) | `o200k_base` Tokens (`200k` vocab) | Reduction (`gpt2` $\rightarrow$ `o200k_base`) | `gpt2` `Tok/Word` (`Tok/Sent` Parity) | `cl100k_base` `Tok/Word` (`Tok/Sent` Parity) | `o200k_base` `Tok/Word` (`Tok/Sent` Parity) |
 | :--- | ---: | ---: | ---: | ---: | :---: | :---: | :---: |
@@ -278,7 +278,7 @@ $$\text{KV bytes/token} = 2 \times 28 \times 8 \times 128 \times 2 = \mathbf{114
   - `bytes per element` ($b = 2$): `fp16` precision (`2` bytes per scalar).
 
 #### Idealized Memory Budget & Token Capacity on `1× NVIDIA L4 (24 GB)`
-Applying the decimal GB convention from [`bench/model_spec.md`](bench/model_spec.md) (verified across all 13 rows in [`capacity_reconciliation.py`](your-submission/partB/capacity_reconciliation.py)):
+Applying the decimal GB convention from [`bench/model_spec.md`](bench/model_spec.md) (verified across all 13 rows in [`capacity_reconciliation.py`](my-submission/partB/capacity_reconciliation.py)):
 
 | Parameter / Step | Analytical Calculation | Value (Decimal / Binary) | Classification |
 | :--- | :--- | :--- | :--- |
@@ -294,7 +294,7 @@ Applying the decimal GB convention from [`bench/model_spec.md`](bench/model_spec
 | **Idealized Max Batch @ `S = 4,096`** | $\lfloor 105{,}329 / 4{,}096 \rfloor$ (`25.715`) | **`25 sequences`** | Idealized Analytical Estimate *(allocator/block fragmentation may reduce actual capacity)* |
 
 ### 6.2 Complete 13-Row Reconciliation of `bench/bench_log.csv`
-Running [`capacity_reconciliation.py`](your-submission/partB/capacity_reconciliation.py) reconciles every row of [`bench/bench_log.csv`](bench/bench_log.csv):
+Running [`capacity_reconciliation.py`](my-submission/partB/capacity_reconciliation.py) reconciles every row of [`bench/bench_log.csv`](bench/bench_log.csv):
 
 | Row | `batch_size` ($B$) | `prompt_len` ($p$) | `gen_len` ($g$) | `wall_clock_s` | `reported_tok_s` (Log) | `calc_total_tok_s` $\frac{N(p+g)}{T}$ | `calc_gen_tok_s` $\frac{Ng}{T}$ | Multiplier $\frac{p+g}{g}$ | Peak KV Demand (GB) | Idealized KV Util | Logged `kv_cache_util` | Preemptions (Ideal / Log) | `ttft_ms_p50` | `itl_ms_p50` | Est. Model Traffic BW (GB/s)* |
 | --: | --: | ---: | --: | ---: | ---: | ---: | ---: | :---: | ---: | ---: | ---: | :---: | ---: | ---: | ---: |
@@ -372,8 +372,8 @@ flowchart LR
     W1 --> W2 --> W3
 ```
 
-### Summary of the Part C Engineering Recommendation ([`your-submission/partC/memo.md`](your-submission/partC/memo.md))
-Rather than gambling the 3-week launch solely on an unverified fine-tuning dataset or assuming prompt engineering can fix deep morphological deficits, [`partC/memo.md`](your-submission/partC/memo.md) establishes a **staged, two-gate decision architecture**:
+### Summary of the Part C Engineering Recommendation ([`my-submission/partC/memo.md`](my-submission/partC/memo.md))
+Rather than gambling the 3-week launch solely on an unverified fine-tuning dataset or assuming prompt engineering can fix deep morphological deficits, [`partC/memo.md`](my-submission/partC/memo.md) establishes a **staged, two-gate decision architecture**:
 
 1. **Primary Committed Launch Path — Option 3 (Concise System-Prompt Engineering, $\Delta p \le 128$ tokens):**
    - **Why Primary:** No SFT dataset exists in the starter kit, and the `$0` API budget prohibits commercial synthetic data generation. Concise language-routed system prompts ($\Delta p \le 128$ tokens) require zero training data, preserve `FLM-4B-Instruct`'s exact English weights (`0%` catastrophic forgetting risk), and keep short-turn L4 concurrency well above peak load ($S = 768 \rightarrow 896$ tokens shifts idealized $B_{\max}$ from `137` to `117` sequences, safe for $B \le 64$).
@@ -404,14 +404,14 @@ Rather than gambling the 3-week launch solely on an unverified fine-tuning datas
 ## 9. Evaluation Methodology and Limitations
 
 1. **Epistemic Separation of Evidence Classes:** Throughout this repository, results are strictly partitioned into:
-   - **Measured Empirical Facts:** Outputs from [`build_corpus.py`](your-submission/partA/build_corpus.py), [`audit_experiments.py`](your-submission/partA/audit_experiments.py), [`compare_tokenizers.py`](your-submission/partA/compare_tokenizers.py), and the 13 benchmark rows in [`bench/bench_log.csv`](bench/bench_log.csv).
-   - **Analytical Calculations & Model-Based Estimates:** First-principles KV-cache capacity (`12.08 GB` pool, `105,329` tokens, $B_{\max,\text{ideal}} = 25$ at $S=4096$) and decode memory-traffic estimates (`190.7–200.1 GB/s`) in [`capacity_reconciliation.py`](your-submission/partB/capacity_reconciliation.py).
-   - **Proposed Plans & Unexecuted Estimates:** Part C's `15k–30k` SFT dataset target, `~18–26 GB` A100 training VRAM, `~3–6 GPU-hours` training duration, and human-evaluation gates in [`your-submission/partC/memo.md`](your-submission/partC/memo.md).
-2. **FLORES-200 Corpus Limitations ([`corpus_documentation.md` §5](your-submission/partA/corpus_documentation.md)):**
+   - **Measured Empirical Facts:** Outputs from [`build_corpus.py`](my-submission/partA/build_corpus.py), [`audit_experiments.py`](my-submission/partA/audit_experiments.py), [`compare_tokenizers.py`](my-submission/partA/compare_tokenizers.py), and the 13 benchmark rows in [`bench/bench_log.csv`](bench/bench_log.csv).
+   - **Analytical Calculations & Model-Based Estimates:** First-principles KV-cache capacity (`12.08 GB` pool, `105,329` tokens, $B_{\max,\text{ideal}} = 25$ at $S=4096$) and decode memory-traffic estimates (`190.7–200.1 GB/s`) in [`capacity_reconciliation.py`](my-submission/partB/capacity_reconciliation.py).
+   - **Proposed Plans & Unexecuted Estimates:** Part C's `15k–30k` SFT dataset target, `~18–26 GB` A100 training VRAM, `~3–6 GPU-hours` training duration, and human-evaluation gates in [`my-submission/partC/memo.md`](my-submission/partC/memo.md).
+2. **FLORES-200 Corpus Limitations ([`corpus_documentation.md` §5](my-submission/partA/corpus_documentation.md)):**
    - **Register & Code-Switching Gap:** FLORES-200 consists of formal encyclopedic/news translations from English Wikimedia (`wikibooks: 351`, `wikinews: 341`, `wikivoyage: 320`). It does not measure casual conversational chat, Romanized Hinglish/Kanglish, or code-switched queries.
    - **English-Source Translationese:** All `1,012` sentences were translated from English, preserving English clause structure and named entities.
    - **Upstream FLORES-200 Artifacts:** Raw FLORES-200 contains CSV-escaped double quotes (`""`) in `60` Tamil, `68` Telugu, and `58` Malayalam lines, and an upstream translator clause omission on Telugu Line `1012` (`55` codepoints vs. English `113` codepoints). These were intentionally not hand-edited to preserve 100% deterministic reproducibility from the official archive.
-3. **Serving Log Limitations ([`partB_report.md`](your-submission/partB/partB_report.md)):**
+3. **Serving Log Limitations ([`partB_report.md`](my-submission/partB/partB_report.md)):**
    - [`bench/bench_log.csv`](bench/bench_log.csv) contains single-point runs (`13` rows) without multi-seed confidence intervals, hardware profiler counters (`ncu`/`dcgm`), or explicit confirmation of whether prefix caching was enabled (observed linear KV utilization scaling is consistent with unshared/unique prompts).
 
 ---
@@ -419,7 +419,7 @@ Rather than gambling the 3-week launch solely on an unverified fine-tuning datas
 ## 10. Reproducibility: Environment Setup and Execution Commands
 
 ### 10.1 Platform Note: Windows ARM64 vs. AMD64 (`x64`) Python for `tiktoken`
-As documented in [`your-submission/NOTEBOOK.md` (Entry 2)](your-submission/NOTEBOOK.md), `tiktoken 0.14.0` does not publish prebuilt `win_arm64` wheels on PyPI (causing `pip install tiktoken` on Windows ARM64 Python to fall back to source compilation and fail without a Rust toolchain). Using **64-bit (`AMD64` / `x86_64`) Python 3.12** installs the official prebuilt `tiktoken-0.14.0-cp312-cp312-win_amd64.whl` wheel cleanly.
+As documented in [`my-submission/NOTEBOOK.md` (Entry 2)](my-submission/NOTEBOOK.md), `tiktoken 0.14.0` does not publish prebuilt `win_arm64` wheels on PyPI (causing `pip install tiktoken` on Windows ARM64 Python to fall back to source compilation and fail without a Rust toolchain). Using **64-bit (`AMD64` / `x86_64`) Python 3.12** installs the official prebuilt `tiktoken-0.14.0-cp312-cp312-win_amd64.whl` wheel cleanly.
 
 ### 10.2 Virtual Environment Setup
 
@@ -449,10 +449,10 @@ Run all commands from the repository root (`starter_kit/`):
 | Step | Command (PowerShell / Bash with `.venv-x64` active) | Script Executed | Generated / Verified Artifacts |
 | :--- | :--- | :--- | :--- |
 | **1. Baseline Starter Script (`v0`)** | `python fertility.py --corpus eng=corpus_sample/eng_sample.txt --corpus hin=corpus_sample/hin_sample.txt --tokenizer gpt2` | [`fertility.py`](fertility.py) | Prints baseline `eng = 1.27`, `hin = 7.45`, `5.89x` fertility ratio matching [`REPORT_v0.md`](REPORT_v0.md). |
-| **2. Part A1 Corpus Build & Validation** | `python your-submission/partA/build_corpus.py` | [`your-submission/partA/build_corpus.py`](your-submission/partA/build_corpus.py) | Verifies `flores200_dataset.tar.gz` (`SHA-256: b8b0b767...11f6`), populates [`corpus/raw/`](your-submission/partA/corpus/raw/) and [`corpus/processed/`](your-submission/partA/corpus/processed/) (`6` langs $\times$ `1,012` lines), writes [`corpus_validation_summary.json`](your-submission/partA/corpus/corpus_validation_summary.json), and prints [`corpus_validation_output.txt`](your-submission/partA/corpus_validation_output.txt). |
-| **3. Part A2 Controlled Ablations (`E1–E6`)** | `python your-submission/partA/audit_experiments.py` | [`your-submission/partA/audit_experiments.py`](your-submission/partA/audit_experiments.py) | Executes single-variable ablations `E1` through `E6` on [`corpus_sample/`](corpus_sample/) and prints exact tables captured in [`e1_e6_raw_output.txt`](your-submission/partA/e1_e6_raw_output.txt). |
-| **4. Part A3 Multi-Tokenizer Benchmark** | `python your-submission/partA/compare_tokenizers.py` | [`your-submission/partA/compare_tokenizers.py`](your-submission/partA/compare_tokenizers.py) | Benchmarks `gpt2`, `cl100k_base`, and `o200k_base` across all 6 languages and 5 denominators; saves [`a3_tokenizer_comparison.json`](your-submission/partA/a3_tokenizer_comparison.json) and prints [`a3_tokenizer_comparison_output.txt`](your-submission/partA/a3_tokenizer_comparison_output.txt). |
-| **5. Part B Capacity & Log Reconciliation** | `python your-submission/partB/capacity_reconciliation.py` | [`your-submission/partB/capacity_reconciliation.py`](your-submission/partB/capacity_reconciliation.py) | Reconciles [`bench/model_spec.md`](bench/model_spec.md) and all 13 rows of [`bench/bench_log.csv`](bench/bench_log.csv); saves [`partB_reconciliation.json`](your-submission/partB/partB_reconciliation.json) and prints [`partB_calculation_output.txt`](your-submission/partB/partB_calculation_output.txt). |
+| **2. Part A1 Corpus Build & Validation** | `python my-submission/partA/build_corpus.py` | [`my-submission/partA/build_corpus.py`](my-submission/partA/build_corpus.py) | Verifies `flores200_dataset.tar.gz` (`SHA-256: b8b0b767...11f6`), populates [`corpus/raw/`](my-submission/partA/corpus/raw/) and [`corpus/processed/`](my-submission/partA/corpus/processed/) (`6` langs $\times$ `1,012` lines), writes [`corpus_validation_summary.json`](my-submission/partA/corpus/corpus_validation_summary.json), and prints [`corpus_validation_output.txt`](my-submission/partA/corpus_validation_output.txt). |
+| **3. Part A2 Controlled Ablations (`E1–E6`)** | `python my-submission/partA/audit_experiments.py` | [`my-submission/partA/audit_experiments.py`](my-submission/partA/audit_experiments.py) | Executes single-variable ablations `E1` through `E6` on [`corpus_sample/`](corpus_sample/) and prints exact tables captured in [`e1_e6_raw_output.txt`](my-submission/partA/e1_e6_raw_output.txt). |
+| **4. Part A3 Multi-Tokenizer Benchmark** | `python my-submission/partA/compare_tokenizers.py` | [`my-submission/partA/compare_tokenizers.py`](my-submission/partA/compare_tokenizers.py) | Benchmarks `gpt2`, `cl100k_base`, and `o200k_base` across all 6 languages and 5 denominators; saves [`a3_tokenizer_comparison.json`](my-submission/partA/a3_tokenizer_comparison.json) and prints [`a3_tokenizer_comparison_output.txt`](my-submission/partA/a3_tokenizer_comparison_output.txt). |
+| **5. Part B Capacity & Log Reconciliation** | `python my-submission/partB/capacity_reconciliation.py` | [`my-submission/partB/capacity_reconciliation.py`](my-submission/partB/capacity_reconciliation.py) | Reconciles [`bench/model_spec.md`](bench/model_spec.md) and all 13 rows of [`bench/bench_log.csv`](bench/bench_log.csv); saves [`partB_reconciliation.json`](my-submission/partB/partB_reconciliation.json) and prints [`partB_calculation_output.txt`](my-submission/partB/partB_calculation_output.txt). |
 
 ---
 
@@ -460,10 +460,10 @@ Run all commands from the repository root (`starter_kit/`):
 
 | Area | Stated Assumption / Unknown | Operational Risk if Violated | Mitigation / Verification Step |
 | :--- | :--- | :--- | :--- |
-| **`FLM-4B-Instruct` Production `128k` Tokenizer** | [`bench/model_spec.md`](bench/model_spec.md) specifies `vocab = 128k`, but the model's tokenizer weights are not included in the starter kit. Part A3 used `tiktoken` (`gpt2`, `cl100k_base`, `o200k_base`) as proxy BPE tokenizers. | If `FLM-4B-Instruct`'s `128k` tokenizer has poor Indic coverage (closer to `cl100k_base` than `o200k_base`), Kannada and Hindi prompts could consume `4.77×–8.84×` more tokens than English and overflow the `4,096` context limit. | **Day 1 Action ([`partC/memo.md` §4.1](your-submission/partC/memo.md)):** Run [`compare_tokenizers.py`](your-submission/partA/compare_tokenizers.py) on `FLM-4B-Instruct`'s actual `128k` tokenizer before any prompt or SFT work. |
-| **Non-KV Runtime Overhead (`~1.6 GB`) & Prefix Caching** | [`bench/model_spec.md`](bench/model_spec.md) states *"assume ~1.6 GB"* for non-KV overhead and does not specify whether vLLM prefix caching (`--enable-prefix-caching`) is active. | If runtime overhead rises to `2.0–3.0 GB` in production, idealized $S=4096$ capacity drops from `25` to `22–24` sequences ([`partB_calculation_output.txt` §3b](your-submission/partB/partB_calculation_output.txt)). | Enforce `max_num_seqs = 24` for 4k-context workloads on the L4 and enable prefix caching so shared system prompts ($\Delta p \le 128$ tokens) are cached once in a single 16-token vLLM block row. |
+| **`FLM-4B-Instruct` Production `128k` Tokenizer** | [`bench/model_spec.md`](bench/model_spec.md) specifies `vocab = 128k`, but the model's tokenizer weights are not included in the starter kit. Part A3 used `tiktoken` (`gpt2`, `cl100k_base`, `o200k_base`) as proxy BPE tokenizers. | If `FLM-4B-Instruct`'s `128k` tokenizer has poor Indic coverage (closer to `cl100k_base` than `o200k_base`), Kannada and Hindi prompts could consume `4.77×–8.84×` more tokens than English and overflow the `4,096` context limit. | **Day 1 Action ([`partC/memo.md` §4.1](my-submission/partC/memo.md)):** Run [`compare_tokenizers.py`](my-submission/partA/compare_tokenizers.py) on `FLM-4B-Instruct`'s actual `128k` tokenizer before any prompt or SFT work. |
+| **Non-KV Runtime Overhead (`~1.6 GB`) & Prefix Caching** | [`bench/model_spec.md`](bench/model_spec.md) states *"assume ~1.6 GB"* for non-KV overhead and does not specify whether vLLM prefix caching (`--enable-prefix-caching`) is active. | If runtime overhead rises to `2.0–3.0 GB` in production, idealized $S=4096$ capacity drops from `25` to `22–24` sequences ([`partB_calculation_output.txt` §3b](my-submission/partB/partB_calculation_output.txt)). | Enforce `max_num_seqs = 24` for 4k-context workloads on the L4 and enable prefix caching so shared system prompts ($\Delta p \le 128$ tokens) are cached once in a single 16-token vLLM block row. |
 | **Local Permissive SFT Data Availability (`$0` API Budget)** | No Hindi/Kannada instruction-tuning dataset is included in the repository. | Without $\ge 10,000$ clean, decontaminated conversational pairs, running LoRA SFT risks overfitting, English regression, or license violations. | **Kill Gate #1 (Day 3 EOD):** Cancel the Week-2 LoRA SFT experiment immediately if $< 10,000$ clean permissive/internal examples are verified, shipping **Option 3 (Concise System Prompt)** instead. |
-| **Unreviewed Indic Languages (`tam`, `tel`, `mal`)** | Native reviewer coverage (`10 hrs/week`) exists **only for Hindi and Kannada**. | Launching unreviewed SFT or prompt changes across Tamil, Telugu, or Malayalam risks undetected grammatical or safety regressions. | **Strict Scope Rule ([`partC/memo.md` §1](your-submission/partC/memo.md)):** Scope the Week 3 launch strictly to evaluated languages (**Hindi and Kannada**). |
+| **Unreviewed Indic Languages (`tam`, `tel`, `mal`)** | Native reviewer coverage (`10 hrs/week`) exists **only for Hindi and Kannada**. | Launching unreviewed SFT or prompt changes across Tamil, Telugu, or Malayalam risks undetected grammatical or safety regressions. | **Strict Scope Rule ([`partC/memo.md` §1](my-submission/partC/memo.md)):** Scope the Week 3 launch strictly to evaluated languages (**Hindi and Kannada**). |
 
 ---
 
@@ -473,5 +473,5 @@ Run all commands from the repository root (`starter_kit/`):
 2. **Part B Conclusion:** [`REPORT_v0.md`](REPORT_v0.md)'s claim that longer prompts improve GPU utilization and that `batch_size = 48` scales to `~3,200 tok/s` is **refuted**. `reported_tok_s` conflates prefill and decode tokens; true decode throughput drops by **`-44.33%`** from short to long workloads at $B=16$. On a `24 GB` L4 GPU (`12.08 GB` idealized KV pool at `114,688 B/tok`), idealized 4k-context capacity is **`25` sequences**, explaining why `batch_size = 24` runs cleanly (`0` preemptions) while `batch_size = 32` (`7` preemptions) and `batch_size = 48` (`23` preemptions) thrash the KV cache.
 3. **Part C Conclusion:** Under a `2`-week implementation window, `1× A100 80GB`, `10 hrs/week` Hindi+Kannada reviewer cap, and `$0` API budget, **Option 3 (Concise System Prompt, $\Delta p \le 128$ tokens)** is the mandatory low-risk primary launch baseline, **Option 1 (Merged `fp16` LoRA SFT)** is a gated Week-2 experiment promoted only if it clears strict data and human-preference gates (`Win - Loss >= +15 pp`), and **Option 2 ($\le 1\text{B}$ Rewriter)** is rejected.
 4. **Future Work Beyond Week 3:**
-   - Benchmark **FP8 / INT8 KV-cache quantization** on the L4 (`57,344 B/tok`), which analytically doubles 4k-context concurrency from `25` to **`51` sequences** ([`partB_calculation_output.txt` §3a](your-submission/partB/partB_calculation_output.txt)).
+   - Benchmark **FP8 / INT8 KV-cache quantization** on the L4 (`57,344 B/tok`), which analytically doubles 4k-context concurrency from `25` to **`51` sequences** ([`partB_calculation_output.txt` §3a](my-submission/partB/partB_calculation_output.txt)).
    - Extend the parallel benchmark with a **conversational Hinglish/Kanglish and code-switching evaluation suite** and onboard native Tamil, Telugu, and Malayalam reviewers before expanding Indic language coverage.
